@@ -1,0 +1,41 @@
+{
+  "name": "universal-grid",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/universal-grid/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/universal-grid",
+        "main": "packages/universal-grid/src/index.ts",
+        "tsConfig": "packages/universal-grid/tsconfig.lib.json",
+        "assets": ["packages/universal-grid/*.md"]
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs universal-grid {args.ver} {args.tag}"
+      },
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/universal-grid/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["coverage/packages/universal-grid"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/packages/universal-grid"
+      }
+    }
+  },
+  "tags": []
+}
