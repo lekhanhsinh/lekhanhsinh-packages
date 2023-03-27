@@ -1,0 +1,5 @@
+export * from './isCube'
+export * from './isPoint'
+export * from './isOffset'
+export * from './isTuple'
+export * from './isTriangle'
