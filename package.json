@@ -2,15 +2,43 @@
   "name": "sinh",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "format": "npx nx format:write",
+    "lint": "npx nx affected -t lint --parallel=3",
+    "test": "npx nx affected -t test --parallel=3 --configuration=ci",
+    "build": "npx nx affected -t build --parallel=3",
+    "prepare": "husky install",
+    "cm": "npx cz"
+  },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
+    "@nrwl/eslint-plugin-nx": "^15.9.0-beta.11",
+    "@nrwl/js": "^15.9.0-beta.11",
+    "@nrwl/linter": "^15.9.0-beta.11",
     "@nrwl/nx-cloud": "latest",
+    "@nrwl/workspace": "^15.9.0-beta.11",
+    "@types/node": "16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "commitizen": "^4.3.0",
+    "cz-emoji": "^1.3.2-canary.2",
+    "eslint": "~8.15.0",
+    "eslint-config-prettier": "8.1.0",
+    "husky": "^8.0.0",
     "nx": "15.8.9",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "ts-node": "10.9.1",
+    "typescript": "~4.9.5"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-emoji"
+    }
+  }
 }
