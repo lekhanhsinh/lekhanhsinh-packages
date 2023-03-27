@@ -1,18 +1,4 @@
 {
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/nx-cloud",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "NGI0MDhjY2UtY2ZkNi00YzA1LTllOGUtN2Y4OWM4OWYyZjFifHJlYWQtd3JpdGU="
-      }
-    }
-  },
-  "extends": "nx/presets/npm.json",
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "affected": {
-    "defaultBase": "master"
-  },
   "targetDefaults": {
     "lint": {
       "inputs": [
@@ -24,5 +10,18 @@
     "test": {
       "inputs": ["default", "^default"]
     }
-  }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e", "typedoc"],
+        "accessToken": "NGI0MDhjY2UtY2ZkNi00YzA1LTllOGUtN2Y4OWM4OWYyZjFifHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "extends": "nx/presets/npm.json"
 }

@@ -35,6 +35,14 @@
         "passWithNoTests": true,
         "reportsDirectory": "../../coverage/packages/universal-grid"
       }
+    },
+    "typedoc": {
+      "executor": "@enio.ai/typedoc:typedoc",
+      "outputs": ["docs/packages/universal-grid"],
+      "options": {
+        "options": "typedoc.json"
+      },
+      "configurations": {}
     }
   },
   "tags": []

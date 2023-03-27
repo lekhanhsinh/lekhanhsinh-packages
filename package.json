@@ -12,6 +12,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@enio.ai/typedoc": "^1.0.8",
     "@nrwl/eslint-plugin-nx": "^15.9.0-beta.11",
     "@nrwl/js": "^15.9.0-beta.11",
     "@nrwl/linter": "^15.9.0-beta.11",
@@ -32,6 +33,9 @@
     "nx": "15.8.9",
     "prettier": "^2.6.2",
     "ts-node": "10.9.1",
+    "typedoc": "^0.23.26",
+    "typedoc-plugin-rename-defaults": "^0.6.4",
+    "typedoc-theme-hierarchy": "^3.0.0",
     "typescript": "~4.9.5",
     "vite": "^4.0.1",
     "vite-plugin-eslint": "^1.8.1",
