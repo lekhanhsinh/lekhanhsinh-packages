@@ -3,7 +3,11 @@ import { type EdgeClass } from '../Edge/types'
 import { type NodeClass } from '../Node/types'
 import { type VertexClass } from '../Vertex/types'
 import { PART_TYPE, type SHAPE } from '../constants'
-import { type CubeCoordinates, type EdgeCoordinates } from '../types'
+import {
+  NodeCoordinates,
+  type CubeCoordinates,
+  type EdgeCoordinates,
+} from '../types'
 import { concat, fromCoordinates, repeat, repeatWith } from './traversers'
 import {
   type PartConstructor,
@@ -49,14 +53,15 @@ export class Grid<T extends PartClass>
   // prettier-ignore
   constructor(grid: Grid<T>)
   // prettier-ignore
-  constructor(partClass: PartConstructor<T>, grid: Grid<any>)
+  constructor(partClass: PartConstructor<T>, grid: Grid<PartClass>)
   constructor(
     partClassOrGrid: PartConstructor<T> | Grid<T>,
     gridOrInput:
       | Traverser<T>
       | Array<Traverser<T>>
       | Iterable<T | PartCoordinates>
-      | Grid<T> = []
+      | Grid<T>
+      | Grid<PartClass> = []
   ) {
     super()
     if (partClassOrGrid instanceof Grid) {
@@ -71,14 +76,19 @@ export class Grid<T extends PartClass>
       if (gridOrInput instanceof Grid) {
         switch ((partClassOrGrid as any).type) {
           case PART_TYPE.NODE:
-            input = this.#getAllNode(gridOrInput as unknown as Grid<PartClass>)
+            input = this.#getAllNode(
+              gridOrInput as Grid<EdgeClass | VertexClass>,
+              partClassOrGrid as PartConstructor<NodeClass>
+            )
             break
           case PART_TYPE.EDGE:
-            input = this.#getAllEdge(gridOrInput as unknown as Grid<PartClass>)
+            input = this.#getAllEdge(
+              gridOrInput as Grid<NodeClass | VertexClass>
+            )
             break
           case PART_TYPE.VERTEX:
             input = this.#getAllVertex(
-              gridOrInput as unknown as Grid<PartClass>
+              gridOrInput as Grid<NodeClass | EdgeClass>
             )
             break
         }
@@ -176,61 +186,78 @@ export class Grid<T extends PartClass>
     return result
   }
 
-  #getAllEdge<U extends PartClass>(grid: Grid<U>): EdgeCoordinates[] {
+  #getAllEdge(grid: Grid<NodeClass | VertexClass>): EdgeCoordinates[] {
     const resulthHasDup: EdgeCoordinates[] = []
+    const arr = grid.toArray()
     switch (grid.type) {
       case PART_TYPE.NODE:
-        grid.toArray().forEach((node) => {
-          resulthHasDup.push(...(node as NodeClass).borders().values())
+        ;(arr as NodeClass[]).forEach((node) => {
+          resulthHasDup.push(...node.borders().values())
         })
         break
       case PART_TYPE.VERTEX:
-        grid.toArray().forEach((node) => {
-          resulthHasDup.push(...(node as VertexClass).protrudes().values())
+        ;(arr as VertexClass[]).forEach((node) => {
+          resulthHasDup.push(...node.protrudes().values())
         })
-        break
-      default:
-        grid.toArray()
         break
     }
     return resulthHasDup
   }
 
-  #getAllNode<U extends PartClass>(grid: Grid<U>): CubeCoordinates[] {
-    const resulthHasDup: CubeCoordinates[] = []
+  #getAllNode(
+    grid: Grid<EdgeClass | VertexClass>,
+    nodeClass: new (coordinates?: NodeCoordinates) => NodeClass
+  ): CubeCoordinates[] {
+    let resulthHasDup: CubeCoordinates[] = []
+    const arr = grid.toArray()
     switch (grid.type) {
       case PART_TYPE.EDGE:
-        grid.toArray().forEach((node) => {
-          resulthHasDup.push(...(node as EdgeClass).joins().values())
+        ;(arr as EdgeClass[]).forEach((node) => {
+          resulthHasDup.push(...node.joins().values())
+        })
+        resulthHasDup = resulthHasDup.filter((n) => {
+          const borders = Array.from(new nodeClass(n).borders().values())
+          borders.every((b) =>
+            (arr as EdgeClass[]).some(
+              (e) =>
+                b.q === e.q &&
+                b.r === e.r &&
+                b.s === e.s &&
+                b.direction === e.direction
+            )
+          )
         })
         break
       case PART_TYPE.VERTEX:
-        grid.toArray().forEach((node) => {
-          resulthHasDup.push(...(node as VertexClass).touches().values())
+        ;(arr as VertexClass[]).forEach((vertex) => {
+          resulthHasDup.push(...vertex.touches().values())
         })
-        break
-      default:
-        grid.toArray()
+        resulthHasDup = resulthHasDup.filter((n) => {
+          const corners = Array.from(new nodeClass(n).corners().values())
+          corners.every((b) =>
+            (arr as EdgeClass[]).some(
+              (e) => b.q === e.q && b.r === e.r && b.s === e.s
+            )
+          )
+        })
         break
     }
     return resulthHasDup
   }
 
-  #getAllVertex<U extends PartClass>(grid: Grid<U>): CubeCoordinates[] {
+  #getAllVertex(grid: Grid<NodeClass | EdgeClass>): CubeCoordinates[] {
     const resulthHasDup: CubeCoordinates[] = []
+    const arr = grid.toArray()
     switch (grid.type) {
       case PART_TYPE.NODE:
-        grid.toArray().forEach((node) => {
-          resulthHasDup.push(...(node as NodeClass).corners().values())
+        ;(arr as NodeClass[]).forEach((node) => {
+          resulthHasDup.push(...node.corners().values())
         })
         break
       case PART_TYPE.EDGE:
-        grid.toArray().forEach((node) => {
-          resulthHasDup.push(...(node as EdgeClass).endpoints().values())
+        ;(arr as EdgeClass[]).forEach((node) => {
+          resulthHasDup.push(...node.endpoints().values())
         })
-        break
-      default:
-        grid.toArray()
         break
     }
     return resulthHasDup
