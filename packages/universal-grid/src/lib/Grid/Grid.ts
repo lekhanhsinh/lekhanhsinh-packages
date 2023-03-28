@@ -3,11 +3,7 @@ import { type EdgeClass } from '../Edge/types'
 import { type NodeClass } from '../Node/types'
 import { type VertexClass } from '../Vertex/types'
 import { PART_TYPE, type SHAPE } from '../constants'
-import {
-  NodeCoordinates,
-  type CubeCoordinates,
-  type EdgeCoordinates,
-} from '../types'
+import { type CubeCoordinates, type EdgeCoordinates } from '../types'
 import { concat, fromCoordinates, repeat, repeatWith } from './traversers'
 import {
   type PartConstructor,
@@ -49,7 +45,7 @@ export class Grid<T extends PartClass>
   // prettier-ignore
   constructor(partClass: PartConstructor<T>, traversers: Traverser<T> | Array<Traverser<T>>)
   // prettier-ignore
-  constructor(partClass: PartConstructor<T>, parts: Iterable<T | PartCoordinates>)
+  constructor(partClass: PartConstructor<T>, parts: Iterable<T | PartCoordinates<T>>)
   // prettier-ignore
   constructor(grid: Grid<T>)
   // prettier-ignore
@@ -59,46 +55,26 @@ export class Grid<T extends PartClass>
     gridOrInput:
       | Traverser<T>
       | Array<Traverser<T>>
-      | Iterable<T | PartCoordinates>
+      | Iterable<T | PartCoordinates<T>>
       | Grid<T>
       | Grid<PartClass> = []
   ) {
     super()
     if (partClassOrGrid instanceof Grid) {
       this.#partClass = partClassOrGrid.#partClass
-      this.appened(partClassOrGrid)
+      this.append(partClassOrGrid)
+    } else if (gridOrInput instanceof Grid) {
+      this.#partClass = partClassOrGrid
+      const input = this.#getAllParts(gridOrInput as Grid<PartClass>)
+      this.append(input as never)
     } else {
       this.#partClass = partClassOrGrid
-      let input = gridOrInput as
-        | Traverser<T>
-        | Array<Traverser<T>>
-        | Iterable<T | PartCoordinates>
-      if (gridOrInput instanceof Grid) {
-        switch ((partClassOrGrid as any).type) {
-          case PART_TYPE.NODE:
-            input = this.#getAllNode(
-              gridOrInput as Grid<EdgeClass | VertexClass>,
-              partClassOrGrid as PartConstructor<NodeClass>
-            )
-            break
-          case PART_TYPE.EDGE:
-            input = this.#getAllEdge(
-              gridOrInput as Grid<NodeClass | VertexClass>
-            )
-            break
-          case PART_TYPE.VERTEX:
-            input = this.#getAllVertex(
-              gridOrInput as Grid<NodeClass | EdgeClass>
-            )
-            break
-        }
-      }
-      this.appened(input as never)
+      this.append(partClassOrGrid as never)
     }
   }
 
-  create = ((coordinates?: PartCoordinates, direction?: number): T => {
-    return new this.#partClass(coordinates, direction) as T
+  create = ((coordinates?: PartCoordinates<T>, direction?: number): T => {
+    return new this.#partClass(coordinates as any, direction) as T
   }) as Traversable<T>['create']
 
   #callTraverser(traverser: Traverser<T>): T[] {
@@ -113,9 +89,9 @@ export class Grid<T extends PartClass>
     input:
       | Traverser<T>
       | Array<Traverser<T>>
-      | Iterable<T | PartCoordinates>
+      | Iterable<T | PartCoordinates<T>>
       | Grid<T>
-  ): Array<T | PartCoordinates> {
+  ): Array<T | PartCoordinates<T>> {
     if (typeof input === 'function') {
       return this.#callTraverser(input)
     } else if (Array.isArray(input) && typeof input[0] === 'function') {
@@ -123,24 +99,24 @@ export class Grid<T extends PartClass>
     } else if (input instanceof Grid) {
       return Array.from(input.values())
     } else {
-      return input as Array<T | PartCoordinates>
+      return input as Array<T | PartCoordinates<T>>
     }
   }
 
-  appened(
+  append: Traversable<T>['append'] = (
     input:
       | Traverser<T>
       | Array<Traverser<T>>
-      | Iterable<T | PartCoordinates>
+      | Iterable<T | PartCoordinates<T>>
       | Grid<T>
-  ): Grid<T> {
+  ): Grid<T> => {
     for (const partOrCoordinates of this.#createsFromIterableOrTraversers(
       input
     )) {
       const part =
         partOrCoordinates instanceof this.#partClass
           ? partOrCoordinates
-          : new this.#partClass(partOrCoordinates)
+          : new this.#partClass(partOrCoordinates as never)
       const found = this.get(part.toString())
       if (found == null) {
         this.set(part.toString(), part as T)
@@ -149,23 +125,14 @@ export class Grid<T extends PartClass>
     return this
   }
 
-  traverse(
-    traversers: Traverser<T> | Array<Traverser<T>>,
-    options?: { bail?: boolean }
-  ): Grid<T>
-  traverse(
-    parts: Iterable<T | PartCoordinates>,
-    options?: { bail?: boolean }
-  ): Grid<T>
-  traverse(grid: Grid<T>, options?: { bail?: boolean }): Grid<T>
-  traverse(
+  traverse: Traversable<T>['traverse'] = (
     input:
       | Traverser<T>
       | Array<Traverser<T>>
-      | Iterable<T | PartCoordinates>
+      | Iterable<T | PartCoordinates<T>>
       | Grid<T>,
     { bail = false, reverse = false } = {}
-  ): Grid<T> {
+  ): Grid<T> => {
     const result = new Grid(this.#partClass)
     const arr = this.#createsFromIterableOrTraversers(input)
     if (reverse) {
@@ -175,7 +142,7 @@ export class Grid<T extends PartClass>
       const part =
         partOrCoordinates instanceof this.#partClass
           ? partOrCoordinates
-          : new this.#partClass(partOrCoordinates)
+          : new this.#partClass(partOrCoordinates as never)
       const found = this.get(part.toString())
       if (found != null) {
         result.set(part.toString(), part as T)
@@ -204,10 +171,7 @@ export class Grid<T extends PartClass>
     return resulthHasDup
   }
 
-  #getAllNode(
-    grid: Grid<EdgeClass | VertexClass>,
-    nodeClass: new (coordinates?: NodeCoordinates) => NodeClass
-  ): CubeCoordinates[] {
+  #getAllNode(grid: Grid<EdgeClass | VertexClass>): CubeCoordinates[] {
     let resulthHasDup: CubeCoordinates[] = []
     const arr = grid.toArray()
     switch (grid.type) {
@@ -216,7 +180,11 @@ export class Grid<T extends PartClass>
           resulthHasDup.push(...node.joins().values())
         })
         resulthHasDup = resulthHasDup.filter((n) => {
-          const borders = Array.from(new nodeClass(n).borders().values())
+          const borders = Array.from(
+            new (this.#partClass as PartConstructor<NodeClass>)(n)
+              .borders()
+              .values()
+          )
           borders.every((b) =>
             (arr as EdgeClass[]).some(
               (e) =>
@@ -233,7 +201,11 @@ export class Grid<T extends PartClass>
           resulthHasDup.push(...vertex.touches().values())
         })
         resulthHasDup = resulthHasDup.filter((n) => {
-          const corners = Array.from(new nodeClass(n).corners().values())
+          const corners = Array.from(
+            new (this.#partClass as PartConstructor<NodeClass>)(n)
+              .corners()
+              .values()
+          )
           corners.every((b) =>
             (arr as EdgeClass[]).some(
               (e) => b.q === e.q && b.r === e.r && b.s === e.s
@@ -261,6 +233,22 @@ export class Grid<T extends PartClass>
         break
     }
     return resulthHasDup
+  }
+
+  #getAllParts(grid: Grid<PartClass>): (CubeCoordinates | EdgeCoordinates)[] {
+    let results: (CubeCoordinates | EdgeCoordinates)[] = []
+    switch (grid.type) {
+      case PART_TYPE.NODE:
+        results = this.#getAllNode(grid as Grid<EdgeClass | VertexClass>)
+        break
+      case PART_TYPE.EDGE:
+        results = this.#getAllEdge(grid as Grid<NodeClass | VertexClass>)
+        break
+      case PART_TYPE.VERTEX:
+        results = this.#getAllVertex(grid as Grid<NodeClass | EdgeClass>)
+        break
+    }
+    return results
   }
 
   toArray(): T[] {

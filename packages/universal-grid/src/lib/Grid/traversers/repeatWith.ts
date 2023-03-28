@@ -7,15 +7,21 @@ export const repeatWith = <T extends PartClass>(
   { includeSource = true } = {}
 ): Traverser<T> => {
   return (createNode, cursor, grid) => {
-    const nodes: T[] = []
-
-    for (const sourceCursor of concat(sources)(createNode, cursor, grid)) {
-      if (includeSource) nodes.push(sourceCursor)
-      for (const node of concat(branches)(createNode, sourceCursor, grid)) {
-        nodes.push(node)
+    const parts: T[] = []
+    for (const sourceCursor of concat<T>(sources as never)(
+      createNode,
+      cursor,
+      grid
+    )) {
+      if (includeSource) parts.push(sourceCursor)
+      for (const part of concat<T>(branches as never)(
+        createNode,
+        sourceCursor,
+        grid
+      )) {
+        parts.push(part)
       }
     }
-
-    return nodes
+    return parts
   }
 }

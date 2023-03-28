@@ -1,16 +1,18 @@
-import { EdgeClass } from '../../Edge'
-import { NodeClass } from '../../Node'
-import { VertexClass } from '../../Vertex'
-import { EdgeCoordinates, type NodeCoordinates } from '../../types'
-import { type PartClass, type Traverser } from '../types'
+import { PartCoordinates, type PartClass, type Traverser } from '../types'
 
-export const fromCoordinates =
-  <T extends PartClass>(
-    ...coordinates: (T extends VertexClass | NodeClass
-      ? NodeCoordinates
-      : T extends EdgeClass
-      ? EdgeCoordinates
-      : never)[]
-  ): Traverser<T> =>
-  (createNode) =>
-    coordinates.map((c) => createNode(c)) as T[]
+// prettier-ignore
+export function fromCoordinates<T extends PartClass>(coordinates: Array<PartCoordinates<T>>): Traverser<T>
+// prettier-ignore
+export function fromCoordinates<T extends PartClass>(...coordinates: Array<PartCoordinates<T>>): Traverser<T>
+export function fromCoordinates<T extends PartClass>(
+  coordinates: PartCoordinates<T> | Array<PartCoordinates<T>>,
+  ...extras: Array<PartCoordinates<T>>
+): Traverser<T> {
+  return (createNode) => {
+    let _coordinates = coordinates as Array<PartCoordinates<T>>
+    if (!Array.isArray(coordinates)) {
+      _coordinates = [coordinates].concat(extras)
+    }
+    return _coordinates.map((c) => createNode(c)) as T[]
+  }
+}
