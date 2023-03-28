@@ -1,5 +1,3 @@
-import { type DIRECTION } from './constants'
-
 export interface PointCoordinates {
   x: number
   y: number
@@ -24,7 +22,7 @@ export type NodeCoordinates =
   | Partial<TupleCoordinates>
   | Partial<CubeCoordinates>
 
-export type EdgeCoordinates = CubeCoordinates & { direction: DIRECTION }
+export type EdgeCoordinates = CubeCoordinates & { direction: number }
 
 export interface Ellipse {
   xRadius: number

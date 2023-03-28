@@ -14,12 +14,12 @@ export enum SHAPE {
 }
 
 export enum DIRECTION {
-  N,
-  NE,
-  E,
-  SE,
-  S,
-  SW,
-  W,
-  NW,
+  E = 0,
+  NE = (1 / 4) * Math.PI,
+  N = (1 / 2) * Math.PI,
+  NW = (3 / 4) * Math.PI,
+  W = Math.PI,
+  SW = (5 / 4) * Math.PI,
+  S = (3 / 2) * Math.PI,
+  SE = (7 / 4) * Math.PI,
 }
