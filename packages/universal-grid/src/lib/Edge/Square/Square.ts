@@ -7,11 +7,17 @@ import {
   type EdgeCoordinates,
   type CubeCoordinates,
   type NodeCoordinates,
+  OffsetCoordinates,
 } from '../../types'
 import { isCube, isOffset, isTuple, tupleToCube } from '../../utils'
 import { fromPixel, toPixel } from './converters'
 
-export class EdgeSquare {
+export class EdgeSquare
+  implements
+    Readonly<SquareSettings>,
+    Readonly<CubeCoordinates>,
+    Readonly<OffsetCoordinates>
+{
   static readonly type = PART_TYPE.EDGE
   static readonly shape = SHAPE.SQUARE
   readonly type = PART_TYPE.EDGE
@@ -27,6 +33,14 @@ export class EdgeSquare {
 
   get anchor(): PointCoordinates {
     return (this.constructor as typeof EdgeSquare).settings.anchor
+  }
+
+  get col(): number {
+    return this.q
+  }
+
+  get row(): number {
+    return this.r
   }
 
   get center(): PointCoordinates {
@@ -67,10 +81,10 @@ export class EdgeSquare {
   }
 
   constructor(coordinates?: EdgeCoordinates)
-  constructor(coordinates?: NodeCoordinates, direction?: DIRECTION)
+  constructor(coordinates?: NodeCoordinates, direction?: number)
   constructor(
     coordinates: NodeCoordinates | EdgeCoordinates = [0, 0, 0],
-    direction: DIRECTION = DIRECTION.N
+    direction: number = DIRECTION.N
   ) {
     const { q, r, s } = EdgeSquare.#toCube(coordinates)
     this.#values = [

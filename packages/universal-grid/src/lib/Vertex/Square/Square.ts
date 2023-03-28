@@ -7,11 +7,17 @@ import {
   type CubeCoordinates,
   type EdgeCoordinates,
   type NodeCoordinates,
+  OffsetCoordinates,
 } from '../../types'
 import { isCube, isOffset, isTuple, tupleToCube } from '../../utils'
 import { fromPixel, toPixel } from './converters'
 
-export class VertexSquare {
+export class VertexSquare
+  implements
+    Readonly<SquareSettings>,
+    Readonly<CubeCoordinates>,
+    Readonly<OffsetCoordinates>
+{
   static readonly type = PART_TYPE.VERTEX
   static readonly shape = SHAPE.SQUARE
   readonly type = PART_TYPE.VERTEX
@@ -27,6 +33,14 @@ export class VertexSquare {
 
   get anchor(): PointCoordinates {
     return (this.constructor as typeof VertexSquare).settings.anchor
+  }
+
+  get col(): number {
+    return this.q
+  }
+
+  get row(): number {
+    return this.r
   }
 
   get center(): PointCoordinates {
