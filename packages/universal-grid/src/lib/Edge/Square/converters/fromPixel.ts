@@ -10,13 +10,9 @@ export const fromPixel = (
   const sr = !inverse.y ? y / height - anchor.y : -y / height + anchor.y
   const q = Math.floor(sq)
   const r = Math.floor(sr)
-  return {
-    q,
-    r,
-    s: 0,
-    direction:
-      Math.abs(Math.abs(sq - q) - 0.5) > Math.abs(Math.abs(sr - r) - 0.5)
-        ? DIRECTION.W
-        : DIRECTION.N,
-  }
+  const direction =
+    Math.abs(Math.abs(sq - q)) < Math.abs(Math.abs(sr - r))
+      ? DIRECTION.W
+      : DIRECTION.N
+  return { q, r, s: 0, direction }
 }
