@@ -15,7 +15,7 @@ import { fromPixel, toPixel } from './converters'
 export class EdgeSquare
   implements
     Readonly<SquareSettings>,
-    Readonly<CubeCoordinates>,
+    Readonly<EdgeCoordinates>,
     Readonly<OffsetCoordinates>
 {
   static readonly type = PART_TYPE.EDGE
@@ -27,11 +27,11 @@ export class EdgeSquare
     return defaultSquareSettings
   }
 
-  get size(): BoundingBox {
+  get size(): SquareSettings['size'] {
     return (this.constructor as typeof EdgeSquare).settings.size
   }
 
-  get anchor(): PointCoordinates {
+  get anchor(): SquareSettings['anchor'] {
     return (this.constructor as typeof EdgeSquare).settings.anchor
   }
 
@@ -80,7 +80,7 @@ export class EdgeSquare
     }
   }
 
-  constructor(coordinates?: EdgeCoordinates)
+  constructor(coordinates?: Partial<EdgeCoordinates>)
   constructor(coordinates?: NodeCoordinates, direction?: number)
   constructor(
     coordinates: NodeCoordinates | EdgeCoordinates = [0, 0, 0],
@@ -91,7 +91,7 @@ export class EdgeSquare
       q,
       r,
       s,
-      direction ?? (coordinates as EdgeCoordinates).direction,
+      (coordinates as EdgeCoordinates).direction ?? direction,
     ]
   }
 

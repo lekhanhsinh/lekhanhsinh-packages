@@ -10,7 +10,7 @@ export type PartCoordinates<T extends PartClass> = T extends
   | VertexClass
   ? NodeCoordinates
   : T extends EdgeClass
-  ? EdgeCoordinates
+  ? Partial<EdgeCoordinates>
   : never
 export type PartConstructor<T extends PartClass> = T extends
   | NodeClass

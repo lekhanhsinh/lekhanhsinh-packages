@@ -49,7 +49,7 @@ export class Grid<T extends PartClass>
   // prettier-ignore
   constructor(grid: Grid<T>)
   // prettier-ignore
-  constructor(partClass: PartConstructor<T>, grid: Grid<PartClass>)
+  constructor(partClass: PartConstructor<T>, grid: Grid<any>)
   constructor(
     partClassOrGrid: PartConstructor<T> | Grid<T>,
     gridOrInput:
@@ -69,12 +69,12 @@ export class Grid<T extends PartClass>
       this.append(input as never)
     } else {
       this.#partClass = partClassOrGrid
-      this.append(partClassOrGrid as never)
+      this.append(gridOrInput as never)
     }
   }
 
   create = ((coordinates?: PartCoordinates<T>, direction?: number): T => {
-    return new this.#partClass(coordinates as any, direction) as T
+    return new this.#partClass(coordinates as never, direction) as T
   }) as Traversable<T>['create']
 
   #callTraverser(traverser: Traverser<T>): T[] {
@@ -153,7 +153,7 @@ export class Grid<T extends PartClass>
     return result
   }
 
-  #getAllEdge(grid: Grid<NodeClass | VertexClass>): EdgeCoordinates[] {
+  #getAllEdge(grid: Grid<PartClass>): EdgeCoordinates[] {
     const resulthHasDup: EdgeCoordinates[] = []
     const arr = grid.toArray()
     switch (grid.type) {
@@ -167,11 +167,14 @@ export class Grid<T extends PartClass>
           resulthHasDup.push(...node.protrudes().values())
         })
         break
+      default:
+        resulthHasDup.push(...(arr as EdgeCoordinates[]))
+        break
     }
     return resulthHasDup
   }
 
-  #getAllNode(grid: Grid<EdgeClass | VertexClass>): CubeCoordinates[] {
+  #getAllNode(grid: Grid<PartClass>): CubeCoordinates[] {
     let resulthHasDup: CubeCoordinates[] = []
     const arr = grid.toArray()
     switch (grid.type) {
@@ -185,7 +188,7 @@ export class Grid<T extends PartClass>
               .borders()
               .values()
           )
-          borders.every((b) =>
+          return borders.every((b) =>
             (arr as EdgeClass[]).some(
               (e) =>
                 b.q === e.q &&
@@ -206,18 +209,21 @@ export class Grid<T extends PartClass>
               .corners()
               .values()
           )
-          corners.every((b) =>
+          return corners.every((b) =>
             (arr as EdgeClass[]).some(
               (e) => b.q === e.q && b.r === e.r && b.s === e.s
             )
           )
         })
         break
+      default:
+        resulthHasDup.push(...arr)
+        break
     }
     return resulthHasDup
   }
 
-  #getAllVertex(grid: Grid<NodeClass | EdgeClass>): CubeCoordinates[] {
+  #getAllVertex(grid: Grid<PartClass>): CubeCoordinates[] {
     const resulthHasDup: CubeCoordinates[] = []
     const arr = grid.toArray()
     switch (grid.type) {
@@ -231,21 +237,24 @@ export class Grid<T extends PartClass>
           resulthHasDup.push(...node.endpoints().values())
         })
         break
+      default:
+        resulthHasDup.push(...arr)
+        break
     }
     return resulthHasDup
   }
 
   #getAllParts(grid: Grid<PartClass>): (CubeCoordinates | EdgeCoordinates)[] {
     let results: (CubeCoordinates | EdgeCoordinates)[] = []
-    switch (grid.type) {
+    switch ((this.#partClass as any).type) {
       case PART_TYPE.NODE:
-        results = this.#getAllNode(grid as Grid<EdgeClass | VertexClass>)
+        results = this.#getAllNode(grid)
         break
       case PART_TYPE.EDGE:
-        results = this.#getAllEdge(grid as Grid<NodeClass | VertexClass>)
+        results = this.#getAllEdge(grid)
         break
       case PART_TYPE.VERTEX:
-        results = this.#getAllVertex(grid as Grid<NodeClass | EdgeClass>)
+        results = this.#getAllVertex(grid)
         break
     }
     return results
