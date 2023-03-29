@@ -5,9 +5,12 @@ import { VertexSquare } from './Square'
 export const defineVertexSquare = (
   squareOptions?: Partial<SquareSettings>
 ): typeof VertexSquare => {
-  const { size, anchor } = { ...defaultSquareSettings, ...squareOptions }
+  const { size, anchor, inverse } = {
+    ...defaultSquareSettings,
+    ...squareOptions,
+  }
 
-  const settings = { size: createSquareDimensions(size), anchor }
+  const settings = { size: createSquareDimensions(size), anchor, inverse }
 
   return class extends VertexSquare {
     static override get settings(): SquareSettings {

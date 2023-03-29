@@ -5,9 +5,12 @@ import { EdgeSquare } from './Square'
 export const defineEdgeSquare = (
   squareOptions?: Partial<SquareSettings>
 ): typeof EdgeSquare => {
-  const { size, anchor } = { ...defaultSquareSettings, ...squareOptions }
+  const { size, anchor, inverse } = {
+    ...defaultSquareSettings,
+    ...squareOptions,
+  }
 
-  const settings = { size: createSquareDimensions(size), anchor }
+  const settings = { size: createSquareDimensions(size), anchor, inverse }
 
   return class extends EdgeSquare {
     static override get settings(): SquareSettings {

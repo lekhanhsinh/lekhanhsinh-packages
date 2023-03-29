@@ -5,9 +5,12 @@ import { defaultSquareSettings, Square } from './Square'
 export const defineNodeSquare = (
   squareOptions?: Partial<SquareSettings>
 ): typeof Square => {
-  const { size, anchor } = { ...defaultSquareSettings, ...squareOptions }
+  const { size, anchor, inverse } = {
+    ...defaultSquareSettings,
+    ...squareOptions,
+  }
 
-  const settings = { size: createSquareDimensions(size), anchor }
+  const settings = { size: createSquareDimensions(size), anchor, inverse }
 
   return class extends Square {
     static override get settings(): SquareSettings {

@@ -35,6 +35,10 @@ export class EdgeSquare
     return (this.constructor as typeof EdgeSquare).settings.anchor
   }
 
+  get inverse(): SquareSettings['inverse'] {
+    return (this.constructor as typeof EdgeSquare).settings.inverse
+  }
+
   get col(): number {
     return this.q
   }

@@ -26,12 +26,16 @@ export class Square
     return defaultSquareSettings
   }
 
-  get size(): BoundingBox {
+  get size(): SquareSettings['size'] {
     return (this.constructor as typeof Square).settings.size
   }
 
-  get anchor(): PointCoordinates {
+  get anchor(): SquareSettings['anchor'] {
     return (this.constructor as typeof Square).settings.anchor
+  }
+
+  get inverse(): SquareSettings['inverse'] {
+    return (this.constructor as typeof Square).settings.inverse
   }
 
   get col(): number {
@@ -155,6 +159,7 @@ export class Square
 export const defaultSquareSettings: Required<SquareSettings> = {
   anchor: { x: 0, y: 0 },
   size: { width: 32, height: 32 },
+  inverse: { x: false, y: false },
 }
 
 export const neighborSteps = new Map<DIRECTION, CubeCoordinates>([

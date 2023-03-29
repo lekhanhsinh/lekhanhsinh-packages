@@ -4,10 +4,10 @@ import { type PointCoordinates, type EdgeCoordinates } from '../../../types'
 
 export const fromPixel = (
   { x = 0, y = 0 }: PointCoordinates,
-  { size: { width, height }, anchor }: SquareSettings
+  { size: { width, height }, anchor, inverse }: SquareSettings
 ): EdgeCoordinates => {
-  const sq = x / width - anchor.x
-  const sr = y / height - anchor.y
+  const sq = !inverse.x ? x / width - anchor.x : -x / width + anchor.x
+  const sr = !inverse.y ? y / height - anchor.y : -y / height + anchor.y
   const q = Math.floor(sq)
   const r = Math.floor(sr)
   return {

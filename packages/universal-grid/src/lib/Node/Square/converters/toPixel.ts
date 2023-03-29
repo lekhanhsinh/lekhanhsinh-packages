@@ -3,10 +3,13 @@ import { type SquareSettings } from '../../types'
 
 export const toPixel = (
   node: CubeCoordinates,
-  { size: { width, height }, anchor }: SquareSettings
+  { size: { width, height }, anchor, inverse }: SquareSettings
 ): PointCoordinates => {
-  return {
-    x: (node.q + 0.5 + anchor.x) * width,
-    y: (node.r + 0.5 + anchor.y) * height,
-  }
+  const x = inverse.x
+    ? (node.q + 0.5 + anchor.x) * width
+    : -(node.q - 0.5 - anchor.x) * width
+  const y = inverse.y
+    ? (node.r + 0.5 + anchor.y) * height
+    : -(node.r - 0.5 - anchor.y) * height
+  return { x, y }
 }

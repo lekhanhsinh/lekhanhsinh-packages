@@ -35,6 +35,10 @@ export class VertexSquare
     return (this.constructor as typeof VertexSquare).settings.anchor
   }
 
+  get inverse(): { x: boolean; y: boolean } {
+    return (this.constructor as typeof VertexSquare).settings.inverse
+  }
+
   get col(): number {
     return this.q
   }
