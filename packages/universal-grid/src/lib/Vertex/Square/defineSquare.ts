@@ -1,9 +1,9 @@
 import { createSquareDimensions, defaultSquareSettings } from '../../Node'
-import { type SquareSettings } from '../../Node/types'
+import { SquareOptions, type SquareSettings } from '../../Node/types'
 import { VertexSquare } from './Square'
 
 export const defineVertexSquare = (
-  squareOptions?: Partial<SquareSettings>
+  squareOptions?: SquareOptions
 ): typeof VertexSquare => {
   const { size, anchor, inverse } = {
     ...defaultSquareSettings,

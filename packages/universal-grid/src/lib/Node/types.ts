@@ -1,5 +1,5 @@
-import { type BoundingBox, type PointCoordinates } from '../types'
-import { type Square } from './Square'
+import { Ellipse, type BoundingBox, type PointCoordinates } from '../types'
+import { Square } from './Square'
 
 export interface NodeSettings {
   size: BoundingBox
@@ -20,3 +20,7 @@ export type HexagonSettings = Pick<
 >
 
 export type NodeClass = Square
+
+export type SquareOptions = Omit<Partial<SquareSettings>, 'size'> & {
+  size: number | Ellipse | BoundingBox
+}

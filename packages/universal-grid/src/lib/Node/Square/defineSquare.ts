@@ -1,9 +1,9 @@
 import { type BoundingBox, type Ellipse } from '../../types'
-import { type SquareSettings } from '../types'
+import { SquareOptions, type SquareSettings } from '../types'
 import { defaultSquareSettings, Square } from './Square'
 
 export const defineNodeSquare = (
-  squareOptions?: Partial<SquareSettings>
+  squareOptions?: SquareOptions
 ): typeof Square => {
   const { size, anchor, inverse } = {
     ...defaultSquareSettings,

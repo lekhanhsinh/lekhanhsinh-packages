@@ -9,8 +9,7 @@ import {
   type NodeCoordinates,
   OffsetCoordinates,
 } from '../../types'
-import { isCube, isOffset, isTuple, tupleToCube } from '../../utils'
-import { fromPixel, toPixel } from './converters'
+import { toCube, toPixel } from './converters'
 
 export class VertexSquare
   implements
@@ -65,23 +64,8 @@ export class VertexSquare
     return this.#values[2]
   }
 
-  static #toCube(coordinates: NodeCoordinates): CubeCoordinates {
-    if (isCube(coordinates)) {
-      return coordinates
-    } else if (isOffset(coordinates)) {
-      return { q: coordinates.col, r: coordinates.row, s: 0 }
-    } else if (isTuple(coordinates)) {
-      return tupleToCube(coordinates)
-    } else {
-      return fromPixel(
-        coordinates as PointCoordinates,
-        (this.constructor as typeof VertexSquare).settings
-      )
-    }
-  }
-
   constructor(coordinates: NodeCoordinates = [0, 0, 0]) {
-    const { q, r, s } = VertexSquare.#toCube(coordinates)
+    const { q, r, s } = toCube(coordinates, this)
     this.#values = [q, r, s]
   }
 

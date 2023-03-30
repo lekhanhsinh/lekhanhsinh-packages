@@ -2,14 +2,12 @@ import { type SquareSettings } from '../types'
 import {
   type CubeCoordinates,
   type OffsetCoordinates,
-  type BoundingBox,
   type PointCoordinates,
   type NodeCoordinates,
   type EdgeCoordinates,
 } from '../../types'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
-import { isCube, isOffset, isTuple, tupleToCube } from '../../utils'
-import { fromPixel, toPixel } from './converters'
+import { toCube, toPixel } from './converters'
 
 export class Square
   implements
@@ -64,23 +62,8 @@ export class Square
     return this.#values[2]
   }
 
-  static #toCube(coordinates: NodeCoordinates): CubeCoordinates {
-    if (isCube(coordinates)) {
-      return coordinates
-    } else if (isOffset(coordinates)) {
-      return { q: coordinates.col, r: coordinates.row, s: 0 }
-    } else if (isTuple(coordinates)) {
-      return tupleToCube(coordinates)
-    } else {
-      return fromPixel(
-        coordinates as PointCoordinates,
-        (this.constructor as typeof Square).settings
-      )
-    }
-  }
-
   constructor(coordinates: NodeCoordinates = [0, 0, 0]) {
-    const { q, r, s } = Square.#toCube(coordinates)
+    const { q, r, s } = toCube(coordinates, this)
     this.#values = [q, r, s]
   }
 
