@@ -80,6 +80,11 @@ export class EdgeSquare
       s,
       (coordinates as EdgeCoordinates).direction ?? direction,
     ]
+    if (![DIRECTION.N, DIRECTION.W].includes(this.direction)) {
+      throw new Error(
+        `Invalid EdgeSquare direction: EdgeSquare direction is DIRECTION.N | DIRECTION.W. Received: ${this.direction}`
+      )
+    }
   }
 
   toString(): string {
