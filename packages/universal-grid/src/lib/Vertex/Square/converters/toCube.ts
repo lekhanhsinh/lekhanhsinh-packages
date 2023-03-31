@@ -1,9 +1,5 @@
 import { type SquareSettings } from '../../../Node'
-import {
-  type PartCoordinates,
-  type CubeCoordinates,
-  type PointCoordinates,
-} from '../../../types'
+import { type PartCoordinates, type CubeCoordinates } from '../../../types'
 import { isCube, isOffset, isTuple, tupleToCube } from '../../../utils'
 import { type VertexSquare } from '../Square'
 import { fromPixel } from './fromPixel'
@@ -19,6 +15,6 @@ export const toCube = (
   } else if (isTuple(coordinates)) {
     return tupleToCube(coordinates)
   } else {
-    return fromPixel(coordinates as PointCoordinates, settings)
+    return fromPixel(coordinates, settings)
   }
 }

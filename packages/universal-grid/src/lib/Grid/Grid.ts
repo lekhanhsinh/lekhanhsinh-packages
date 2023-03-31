@@ -183,7 +183,7 @@ export class Grid<T extends PartClass>
       if (found != null) {
         result.set(part.toString(), part)
       } else if (bail) {
-        return this
+        return result
       }
     }
     return result

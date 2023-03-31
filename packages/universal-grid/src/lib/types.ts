@@ -26,17 +26,13 @@ export type EdgeCoordinates = CubeCoordinates & { direction: number }
 export type PartCoordinates<T extends PartClass> = T extends
   | NodeClass
   | VertexClass
-  ?
-      | Partial<PointCoordinates>
-      | Partial<OffsetCoordinates>
-      | Partial<TupleCoordinates>
-      | Partial<CubeCoordinates>
+  ? PointCoordinates | OffsetCoordinates | TupleCoordinates | CubeCoordinates
   : T extends EdgeClass
   ?
-      | Partial<PointCoordinates & { direction: number }>
-      | Partial<OffsetCoordinates & { direction: number }>
-      | Partial<[q: number, r: number, s: number, direction: number]>
-      | Partial<EdgeCoordinates>
+      | (PointCoordinates & { direction: number })
+      | (OffsetCoordinates & { direction: number })
+      | [q: number, r: number, s: number, direction: number]
+      | EdgeCoordinates
   : never
 
 export interface Ellipse {

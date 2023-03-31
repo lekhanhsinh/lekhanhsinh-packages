@@ -69,10 +69,15 @@ export class EdgeSquare
 
   constructor(coordinates?: PartCoordinates<EdgeSquare>)
   constructor(
-    coordinates: PartCoordinates<EdgeSquare> | EdgeCoordinates = [0, 0, 0]
+    coordinates: PartCoordinates<EdgeSquare> | EdgeCoordinates = [
+      0,
+      0,
+      0,
+      DIRECTION.N,
+    ]
   ) {
-    const { q, r, s } = toCube(coordinates, this)
-    this.#values = [q, r, s, (coordinates as EdgeCoordinates).direction]
+    const { q, r, s, direction } = toCube(coordinates, this)
+    this.#values = [q, r, s, direction]
     if (![DIRECTION.N, DIRECTION.W].includes(this.direction)) {
       throw new Error(
         `Invalid EdgeSquare direction: EdgeSquare direction is DIRECTION.N | DIRECTION.W. Received: ${this.direction}`
