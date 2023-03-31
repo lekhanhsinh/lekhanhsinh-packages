@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { fromPixel } from './fromPixel'
 describe('fromPixel', () => {
-  it('{ x: 0, y: 0 } === { q: -1, r: -1, s: 0 }', () => {
+  it('return CubeCoordinates from a pixel point', () => {
     expect(
       fromPixel(
         { x: 0, y: 0 },
@@ -12,8 +12,7 @@ describe('fromPixel', () => {
         }
       )
     ).toEqual({ q: -1, r: -1, s: 0 })
-  })
-  it('{ x: 100, y: 100 } === { q: 1, r: 1, s: 0 }', () => {
+
     expect(
       fromPixel(
         { x: 100, y: 100 },
@@ -24,8 +23,7 @@ describe('fromPixel', () => {
         }
       )
     ).toEqual({ q: 1, r: 1, s: 0 })
-  })
-  it('{ x: 1234, y: 1234 } === { q: 24, r: 24, s: 0 }', () => {
+
     expect(
       fromPixel(
         { x: 1234, y: 1234 },
@@ -36,8 +34,7 @@ describe('fromPixel', () => {
         }
       )
     ).toEqual({ q: 24, r: 24, s: 0 })
-  })
-  it('{ x: 100, y: 100 } inverse:{ x: false, y: true } === { q: 1, r: -2, s: 0 }', () => {
+
     expect(
       fromPixel(
         { x: 100, y: 100 },
@@ -48,8 +45,7 @@ describe('fromPixel', () => {
         }
       )
     ).toEqual({ q: 1, r: -2, s: 0 })
-  })
-  it('{ x: 1234, y: 1234 } inverse:{ x: false, y: true } === { q: 24, r: -25, s: 0 }', () => {
+
     expect(
       fromPixel(
         { x: 1234, y: 1234 },
