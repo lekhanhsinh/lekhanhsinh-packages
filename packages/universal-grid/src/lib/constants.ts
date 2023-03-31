@@ -23,3 +23,15 @@ export enum DIRECTION {
   S = (3 / 2) * Math.PI,
   SE = (7 / 4) * Math.PI,
 }
+
+export const PART_RELATION = new Map<string, string>([
+  [`${PART_TYPE.NODE},${PART_TYPE.NODE}`, 'neighbors'],
+  [`${PART_TYPE.NODE},${PART_TYPE.EDGE}`, 'borders'],
+  [`${PART_TYPE.NODE},${PART_TYPE.VERTEX}`, 'corners'],
+  [`${PART_TYPE.EDGE},${PART_TYPE.EDGE}`, 'continues'],
+  [`${PART_TYPE.EDGE},${PART_TYPE.NODE}`, 'joins'],
+  [`${PART_TYPE.EDGE},${PART_TYPE.VERTEX}`, 'endpoints'],
+  [`${PART_TYPE.VERTEX},${PART_TYPE.VERTEX}`, 'adjacents'],
+  [`${PART_TYPE.VERTEX},${PART_TYPE.NODE}`, 'touches'],
+  [`${PART_TYPE.VERTEX},${PART_TYPE.EDGE}`, 'protrudes'],
+])
