@@ -1,4 +1,4 @@
-import { createSquareDimensions, defaultSquareSettings } from '../../Node'
+import { createSquareBoundingBox, defaultSquareSettings } from '../../Node'
 import { type SquareOptions, type SquareSettings } from '../../Node/types'
 import { EdgeSquare } from './Square'
 
@@ -10,7 +10,7 @@ export const defineEdgeSquare = (
     ...squareOptions,
   }
 
-  const settings = { size: createSquareDimensions(size), anchor, inverse }
+  const settings = { size: createSquareBoundingBox(size), anchor, inverse }
 
   return class extends EdgeSquare {
     static override get settings(): SquareSettings {
