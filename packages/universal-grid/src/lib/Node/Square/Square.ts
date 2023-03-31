@@ -9,7 +9,7 @@ import {
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
 import { toCube, toPixel } from './converters'
 
-export class Square
+export class NodeSquare
   implements
     Readonly<SquareSettings>,
     Readonly<CubeCoordinates>,
@@ -25,15 +25,15 @@ export class Square
   }
 
   get size(): SquareSettings['size'] {
-    return (this.constructor as typeof Square).settings.size
+    return (this.constructor as typeof NodeSquare).settings.size
   }
 
   get anchor(): SquareSettings['anchor'] {
-    return (this.constructor as typeof Square).settings.anchor
+    return (this.constructor as typeof NodeSquare).settings.anchor
   }
 
   get inverse(): SquareSettings['inverse'] {
-    return (this.constructor as typeof Square).settings.inverse
+    return (this.constructor as typeof NodeSquare).settings.inverse
   }
 
   get col(): number {
@@ -165,3 +165,5 @@ export const cornerSteps = new Map<DIRECTION, CubeCoordinates>([
   [DIRECTION.SE, { q: 1, r: -1, s: 0 }],
   [DIRECTION.SW, { q: 0, r: -1, s: 0 }],
 ])
+
+export const Square = NodeSquare

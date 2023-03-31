@@ -18,3 +18,5 @@ export const defineNodeSquare = (
     }
   }
 }
+
+export const defineSquare = defineNodeSquare
