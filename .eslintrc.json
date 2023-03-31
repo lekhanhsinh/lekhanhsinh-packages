@@ -23,7 +23,11 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript", "prettier"],
+      "extends": [
+        "plugin:@nrwl/nx/typescript",
+        "standard-with-typescript",
+        "prettier"
+      ],
       "rules": {}
     },
     {

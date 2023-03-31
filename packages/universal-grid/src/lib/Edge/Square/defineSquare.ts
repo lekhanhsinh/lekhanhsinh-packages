@@ -1,5 +1,5 @@
 import { createSquareDimensions, defaultSquareSettings } from '../../Node'
-import { SquareOptions, type SquareSettings } from '../../Node/types'
+import { type SquareOptions, type SquareSettings } from '../../Node/types'
 import { EdgeSquare } from './Square'
 
 export const defineEdgeSquare = (

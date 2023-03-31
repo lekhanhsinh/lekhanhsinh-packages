@@ -1,4 +1,4 @@
-import { PartCoordinates, type PartClass, type Traverser } from '../types'
+import { type PartCoordinates, type PartClass, type Traverser } from '../types'
 
 // prettier-ignore
 export function fromCoordinates<T extends PartClass>(coordinates: Array<PartCoordinates<T>>): Traverser<T>

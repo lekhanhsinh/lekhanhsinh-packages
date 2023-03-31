@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type NodeClass } from '../Node/types'
-import { PART_RELATION, PART_TYPE, type SHAPE } from '../constants'
+import { PART_RELATIONS, PART_TYPE, type SHAPE } from '../constants'
 import { type CubeCoordinates, type EdgeCoordinates } from '../types'
 import { concat, fromCoordinates, repeat, repeatWith } from './traversers'
 import {
@@ -42,8 +42,8 @@ export class Grid<T extends PartClass>
     grid: Grid<PartClass>
   ): Array<CubeCoordinates | EdgeCoordinates> {
     let results: Array<CubeCoordinates | EdgeCoordinates> = []
-    const relation = PART_RELATION.get(`${grid.type},${this.type}`)
-    const relation1 = PART_RELATION.get(`${this.type},${grid.type}`)
+    const relation = PART_RELATIONS.get(`${grid.type},${this.type}`)
+    const relation1 = PART_RELATIONS.get(`${this.type},${grid.type}`)
     if (relation == null || relation1 == null) {
       return results
     }

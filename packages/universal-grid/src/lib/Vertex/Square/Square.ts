@@ -7,7 +7,7 @@ import {
   type CubeCoordinates,
   type EdgeCoordinates,
   type NodeCoordinates,
-  OffsetCoordinates,
+  type OffsetCoordinates,
 } from '../../types'
 import { toCube, toPixel } from './converters'
 

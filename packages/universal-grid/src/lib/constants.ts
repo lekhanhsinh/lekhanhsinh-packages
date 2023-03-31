@@ -24,7 +24,7 @@ export enum DIRECTION {
   SE = (7 / 4) * Math.PI,
 }
 
-export const PART_RELATION = new Map<string, string>([
+export const PART_RELATIONS = new Map<string, string>([
   [`${PART_TYPE.NODE},${PART_TYPE.NODE}`, 'neighbors'],
   [`${PART_TYPE.NODE},${PART_TYPE.EDGE}`, 'borders'],
   [`${PART_TYPE.NODE},${PART_TYPE.VERTEX}`, 'corners'],

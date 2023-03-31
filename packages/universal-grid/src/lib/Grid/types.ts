@@ -1,7 +1,7 @@
-import { EdgeClass } from '../Edge'
-import { NodeClass } from '../Node'
-import { VertexClass } from '../Vertex'
-import { EdgeCoordinates, type NodeCoordinates } from '../types'
+import { type EdgeClass } from '../Edge'
+import { type NodeClass } from '../Node'
+import { type VertexClass } from '../Vertex'
+import { type EdgeCoordinates, type NodeCoordinates } from '../types'
 import { type Grid } from './Grid'
 
 export type PartClass = NodeClass | EdgeClass | VertexClass
@@ -20,7 +20,7 @@ export type PartConstructor<T extends PartClass> = T extends
   ? new (coordinates?: PartCoordinates<T>, direction?: number) => T
   : never
 
-export type Traversable<T extends PartClass> = {
+export interface Traversable<T extends PartClass> {
   create: T extends NodeClass | VertexClass
     ? (coordinates?: NodeCoordinates) => T
     : T extends EdgeClass

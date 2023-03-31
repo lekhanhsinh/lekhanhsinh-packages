@@ -1,8 +1,8 @@
-import { SquareSettings } from '../../../Node'
+import { type SquareSettings } from '../../../Node'
 import {
-  NodeCoordinates,
-  CubeCoordinates,
-  PointCoordinates,
+  type NodeCoordinates,
+  type CubeCoordinates,
+  type PointCoordinates,
 } from '../../../types'
 import { isCube, isOffset, isTuple, tupleToCube } from '../../../utils'
 import { fromPixel } from './fromPixel'
