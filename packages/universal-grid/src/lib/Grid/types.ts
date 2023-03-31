@@ -5,6 +5,7 @@ import { type EdgeCoordinates, type NodeCoordinates } from '../types'
 import { type Grid } from './Grid'
 
 export type PartClass = NodeClass | EdgeClass | VertexClass
+
 export type PartCoordinates<T extends PartClass> = T extends
   | NodeClass
   | VertexClass
