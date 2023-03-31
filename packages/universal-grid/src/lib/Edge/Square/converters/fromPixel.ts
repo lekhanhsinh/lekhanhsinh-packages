@@ -3,7 +3,7 @@ import { DIRECTION } from '../../../constants'
 import { type PointCoordinates, type EdgeCoordinates } from '../../../types'
 
 export const fromPixel = (
-  { x = 0, y = 0 }: PointCoordinates,
+  { x = 0, y = 0 }: Partial<PointCoordinates>,
   { size: { width, height }, anchor, inverse }: SquareSettings
 ): EdgeCoordinates => {
   const sq = !inverse.x ? x / width - anchor.x : -x / width + anchor.x

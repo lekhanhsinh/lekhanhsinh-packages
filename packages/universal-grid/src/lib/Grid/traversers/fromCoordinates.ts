@@ -1,5 +1,6 @@
+import { type PartCoordinates } from '../../types'
 import { isTuple } from '../../utils'
-import { type PartCoordinates, type PartClass, type Traverser } from '../types'
+import { type PartClass, type Traverser } from '../types'
 
 // prettier-ignore
 export function fromCoordinates<T extends PartClass>(coordinates: Array<PartCoordinates<T>>): Traverser<T>
@@ -14,6 +15,6 @@ export function fromCoordinates<T extends PartClass>(
     if (!Array.isArray(coordinates) || isTuple(coordinates)) {
       _coordinates = [coordinates as PartCoordinates<T>].concat(extras)
     }
-    return _coordinates.map((c) => createNode(c)) as T[]
+    return _coordinates.map((c) => createNode(c))
   }
 }

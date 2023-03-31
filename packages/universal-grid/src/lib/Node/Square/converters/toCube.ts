@@ -1,6 +1,6 @@
-import { type SquareSettings } from '../../../Node'
+import { type NodeSquare, type SquareSettings } from '../../../Node'
 import {
-  type NodeCoordinates,
+  type PartCoordinates,
   type CubeCoordinates,
   type PointCoordinates,
 } from '../../../types'
@@ -8,7 +8,7 @@ import { isCube, isOffset, isTuple, tupleToCube } from '../../../utils'
 import { fromPixel } from './fromPixel'
 
 export const toCube = (
-  coordinates: NodeCoordinates,
+  coordinates: PartCoordinates<NodeSquare>,
   settings: SquareSettings
 ): CubeCoordinates => {
   if (isCube(coordinates)) {

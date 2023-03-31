@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type NodeClass } from '../Node/types'
 import { PART_RELATIONS, PART_TYPE, type SHAPE } from '../constants'
-import { type CubeCoordinates, type EdgeCoordinates } from '../types'
+import {
+  type PartCoordinates,
+  type CubeCoordinates,
+  type EdgeCoordinates,
+} from '../types'
 import { concat, fromCoordinates, repeat, repeatWith } from './traversers'
 import {
   type PartConstructor,
   type PartClass,
   type Traverser,
-  type PartCoordinates,
   type Traversable,
 } from './types'
 
@@ -110,16 +113,12 @@ export class Grid<T extends PartClass>
     }
   }
 
-  create = ((coordinates?: PartCoordinates<T>, direction?: number): T => {
-    return new this.#partClass(coordinates as never, direction) as T
-  }) as Traversable<T>['create']
+  create(coordinates?: PartCoordinates<T>): T {
+    return new this.#partClass(coordinates as never)
+  }
 
   #callTraverser(traverser: Traverser<T>): T[] {
-    return traverser(
-      this.create.bind(this) as Traversable<T>['create'],
-      this.last,
-      this
-    )
+    return traverser(this.create.bind(this), this.last, this)
   }
 
   #createsFromIterableOrTraversers(
@@ -156,7 +155,7 @@ export class Grid<T extends PartClass>
           : new this.#partClass(partOrCoordinates as never)
       const found = this.get(part.toString())
       if (found == null) {
-        this.set(part.toString(), part as T)
+        this.set(part.toString(), part)
       }
     }
     return this
@@ -182,7 +181,7 @@ export class Grid<T extends PartClass>
           : new this.#partClass(partOrCoordinates as never)
       const found = this.get(part.toString())
       if (found != null) {
-        result.set(part.toString(), part as T)
+        result.set(part.toString(), part)
       } else if (bail) {
         return this
       }

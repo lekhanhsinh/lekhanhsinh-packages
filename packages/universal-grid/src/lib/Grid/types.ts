@@ -1,35 +1,17 @@
 import { type EdgeClass } from '../Edge'
 import { type NodeClass } from '../Node'
 import { type VertexClass } from '../Vertex'
-import { type EdgeCoordinates, type NodeCoordinates } from '../types'
+import { type PartCoordinates } from '../types'
 import { type Grid } from './Grid'
 
 export type PartClass = NodeClass | EdgeClass | VertexClass
 
-export type PartCoordinates<T extends PartClass> = T extends
-  | NodeClass
-  | VertexClass
-  ? NodeCoordinates
-  : T extends EdgeClass
-  ? Partial<EdgeCoordinates>
-  : never
-export type PartConstructor<T extends PartClass> = T extends
-  | NodeClass
-  | VertexClass
-  ? new (coordinates?: NodeCoordinates) => T
-  : T extends EdgeClass
-  ? new (coordinates?: PartCoordinates<T>, direction?: number) => T
-  : never
+export type PartConstructor<T extends PartClass> = new (
+  coordinates?: PartCoordinates<T>
+) => T
 
 export interface Traversable<T extends PartClass> {
-  create: T extends NodeClass | VertexClass
-    ? (coordinates?: NodeCoordinates) => T
-    : T extends EdgeClass
-    ? {
-        (coordinates?: EdgeCoordinates): T
-        (coordinates?: NodeCoordinates, direction?: number): T
-      }
-    : never
+  create: (coordinates?: PartCoordinates<T>) => T
   traverse: {
     (
       traversers: Traverser<T>,

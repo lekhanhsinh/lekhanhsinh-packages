@@ -5,7 +5,7 @@ import {
   type PointCoordinates,
   type EdgeCoordinates,
   type CubeCoordinates,
-  type NodeCoordinates,
+  type PartCoordinates,
   type OffsetCoordinates,
 } from '../../types'
 import { toCube, toPixel } from './converters'
@@ -67,19 +67,12 @@ export class EdgeSquare
     return this.#values[3]
   }
 
-  constructor(coordinates?: Partial<EdgeCoordinates>)
-  constructor(coordinates?: NodeCoordinates, direction?: number)
+  constructor(coordinates?: PartCoordinates<EdgeSquare>)
   constructor(
-    coordinates: NodeCoordinates | EdgeCoordinates = [0, 0, 0],
-    direction: number = DIRECTION.N
+    coordinates: PartCoordinates<EdgeSquare> | EdgeCoordinates = [0, 0, 0]
   ) {
     const { q, r, s } = toCube(coordinates, this)
-    this.#values = [
-      q,
-      r,
-      s,
-      (coordinates as EdgeCoordinates).direction ?? direction,
-    ]
+    this.#values = [q, r, s, (coordinates as EdgeCoordinates).direction]
     if (![DIRECTION.N, DIRECTION.W].includes(this.direction)) {
       throw new Error(
         `Invalid EdgeSquare direction: EdgeSquare direction is DIRECTION.N | DIRECTION.W. Received: ${this.direction}`

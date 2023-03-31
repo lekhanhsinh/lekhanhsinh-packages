@@ -6,7 +6,7 @@ import {
   type PointCoordinates,
   type CubeCoordinates,
   type EdgeCoordinates,
-  type NodeCoordinates,
+  type PartCoordinates,
   type OffsetCoordinates,
 } from '../../types'
 import { toCube, toPixel } from './converters'
@@ -64,7 +64,7 @@ export class VertexSquare
     return this.#values[2]
   }
 
-  constructor(coordinates: NodeCoordinates = [0, 0, 0]) {
+  constructor(coordinates: PartCoordinates<VertexSquare> = [0, 0, 0]) {
     const { q, r, s } = toCube(coordinates, this)
     this.#values = [q, r, s]
   }

@@ -3,7 +3,7 @@ import {
   type CubeCoordinates,
   type OffsetCoordinates,
   type PointCoordinates,
-  type NodeCoordinates,
+  type PartCoordinates,
   type EdgeCoordinates,
 } from '../../types'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
@@ -62,7 +62,7 @@ export class NodeSquare
     return this.#values[2]
   }
 
-  constructor(coordinates: NodeCoordinates = [0, 0, 0]) {
+  constructor(coordinates: PartCoordinates<NodeSquare> = [0, 0, 0]) {
     const { q, r, s } = toCube(coordinates, this)
     this.#values = [q, r, s]
   }

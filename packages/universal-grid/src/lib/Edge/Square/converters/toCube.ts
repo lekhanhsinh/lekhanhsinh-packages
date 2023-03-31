@@ -1,23 +1,37 @@
 import { type SquareSettings } from '../../../Node'
-import {
-  type NodeCoordinates,
-  type CubeCoordinates,
-  type PointCoordinates,
-} from '../../../types'
 import { isCube, isOffset, isTuple, tupleToCube } from '../../../utils'
 import { fromPixel } from './fromPixel'
+import { type EdgeClass } from '../../types'
+import {
+  type PointCoordinates,
+  type PartCoordinates,
+  type EdgeCoordinates,
+  type CubeCoordinates,
+} from '../../../types'
+import { DIRECTION } from '../../../constants'
 
 export const toCube = (
-  coordinates: NodeCoordinates,
+  coordinates: PartCoordinates<EdgeClass>,
   settings: SquareSettings
-): CubeCoordinates => {
+): EdgeCoordinates => {
+  let _direction = (coordinates as { direction?: number }).direction
+  let _coordinates: CubeCoordinates & { direction?: number }
   if (isCube(coordinates)) {
-    return coordinates
+    _coordinates = coordinates
   } else if (isOffset(coordinates)) {
-    return { q: coordinates.col, r: coordinates.row, s: 0 }
+    _coordinates = {
+      q: coordinates.col,
+      r: coordinates.row,
+      s: 0,
+    }
   } else if (isTuple(coordinates)) {
-    return tupleToCube(coordinates)
+    _direction = (coordinates as number[])[3]
+    _coordinates = tupleToCube(coordinates)
   } else {
-    return fromPixel(coordinates as PointCoordinates, settings)
+    _coordinates = fromPixel(coordinates as PointCoordinates, settings)
+  }
+  return {
+    ..._coordinates,
+    direction: _direction ?? _coordinates.direction ?? DIRECTION.N,
   }
 }
