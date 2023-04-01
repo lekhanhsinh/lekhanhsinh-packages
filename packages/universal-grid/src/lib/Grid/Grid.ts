@@ -69,10 +69,12 @@ export class Grid<T extends PartClass>
             .values()
         )
         return parts.every((b) =>
-          arr.some((e: any) =>
-            b.q === e.q && b.r === e.r && b.s === e.s && b.direction != null
-              ? b.direction === e.direction
-              : true
+          arr.some(
+            (e: any) =>
+              b.q === e.q &&
+              b.r === e.r &&
+              b.s === e.s &&
+              (b.direction != null ? b.direction === e.direction : true)
           )
         )
       })
