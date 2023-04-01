@@ -36,13 +36,12 @@
       "rules": {}
     },
     {
-      "files": [
-        "*.spec.ts",
-        "*.spec.tsx",
-        "*.spec.js",
-        "*.spec.jsx",
-        "prettier"
-      ],
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.md"],
+      "extends": ["plugin:markdown/recommended"],
       "rules": {}
     }
   ]
