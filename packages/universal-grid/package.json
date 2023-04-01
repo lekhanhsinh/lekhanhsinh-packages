@@ -3,6 +3,15 @@
   "version": "0.0.5",
   "type": "commonjs",
   "license": "MIT",
+  "author": {
+    "name": "Le Khanh Sinh",
+    "url": "https://github.com/lekhanhsinh/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lekhanhsinh/lekhanhsinh.git",
+    "directory": "packages/universal-grid"
+  },
   "keywords": [
     "grid",
     "square",
