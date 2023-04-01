@@ -1,5 +1,11 @@
 {
-  "name": "@sinh/universal-grid",
+  "name": "@lekhanhsinh/universal-grid",
   "version": "0.0.1",
-  "type": "commonjs"
+  "type": "commonjs",
+  "keywords": [
+    "grid",
+    "square",
+    "tile",
+    "node"
+  ]
 }
