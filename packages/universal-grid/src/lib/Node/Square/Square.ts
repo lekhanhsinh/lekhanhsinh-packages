@@ -8,6 +8,7 @@ import {
 } from '../../types'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
 import { toCube, toPixel } from './converters'
+import { ellipseFilled, lineWalk, rectangleFilled } from './traversers'
 
 export class NodeSquare
   implements
@@ -15,6 +16,10 @@ export class NodeSquare
     Readonly<CubeCoordinates>,
     Readonly<OffsetCoordinates>
 {
+  static lineWalk = lineWalk
+  static rectangleFilled = rectangleFilled
+  static ellipseFilled = ellipseFilled
+
   static readonly type = PART_TYPE.NODE
   static readonly shape = SHAPE.SQUARE
   readonly type = PART_TYPE.NODE
