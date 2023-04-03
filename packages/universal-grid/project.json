@@ -48,6 +48,7 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "push": true,
         "postTargets": [
           "universal-grid:deploy:npm",
           "universal-grid:deploy:github"
