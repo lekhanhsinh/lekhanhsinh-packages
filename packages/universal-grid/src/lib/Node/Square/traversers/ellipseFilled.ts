@@ -42,7 +42,7 @@ export const ellipseFilledNormal = (
   for (let r = top; r <= bottom; r++) {
     for (let q = left; q <= right; q++) {
       if (
-        (!includeStart || (includeStart && q === center.q && r === center.r)) &&
+        !(!includeStart && q === center.q && r === center.r) &&
         isInsideEllipse(center, { q, r, s: 0 }, { xRadius, yRadius })
       ) {
         results.push({ q, r, s: 0 })

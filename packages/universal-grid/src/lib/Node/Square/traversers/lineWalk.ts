@@ -61,10 +61,9 @@ export const lineWalkVector = (
   let iq = 1
   let ir = 1
 
-  let count = 0
+  let count = 1
   if (includeStart) {
     results.push({ q, r, s: 0 })
-    count += 1
   }
 
   while (count < length) {

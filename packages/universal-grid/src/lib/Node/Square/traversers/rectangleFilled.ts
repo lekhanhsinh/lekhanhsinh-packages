@@ -45,7 +45,7 @@ export function rectangleFilled(options: {
           direction: direction + Math.PI / 2,
           length: size.height,
         }),
-        lineWalk({ direction, length: size.width - 1 })
+        lineWalk({ direction, length: size.width })
       )(create, first, grid)
       if (!includeStart) {
         results.shift()
@@ -59,7 +59,7 @@ export function rectangleFilled(options: {
       if (Number.isFinite(radius)) {
         _radius = { xRadius: radius as number, yRadius: radius as number }
       }
-      if (!spiral) {
+      if (spiral) {
         results = rectangleFilledSpiral(first, _radius, startDirection, {
           includeStart,
         })
@@ -85,7 +85,7 @@ export const rectangleFilledNormal = (
   const results: CubeCoordinates[] = []
   for (let i = -xRadius; i < xRadius; i++) {
     for (let j = -yRadius; j < yRadius; j++) {
-      if (!includeStart || (includeStart && i === 0 && j === 0)) {
+      if (!(!includeStart && i === 0 && j === 0)) {
         results.push({ q: center.q + i, r: center.r + j, s: 0 })
       }
     }
@@ -102,9 +102,7 @@ export const rectangleFilledSpiral = (
   const { includeStart = true } = options ?? {}
   const results: CubeCoordinates[] = []
   let round = 0
-  if (includeStart) {
-    results.push({ q: center.q, r: center.r, s: 0 })
-  }
+  results.push({ q: center.q, r: center.r, s: 0 })
 
   let direction = startDirection
   while (round < Math.min(xRadius, yRadius) * 2) {
@@ -119,7 +117,7 @@ export const rectangleFilledSpiral = (
       const line = lineWalkVector(
         results.at(-1) as CubeCoordinates,
         direction,
-        round + 1 + d * 2,
+        round + 2 + d * 2,
         {
           includeStart: false,
         }
@@ -128,6 +126,9 @@ export const rectangleFilledSpiral = (
       direction += Math.PI / 2
     }
     round += 1
+  }
+  if (!includeStart) {
+    results.shift()
   }
   results.pop()
   return results
