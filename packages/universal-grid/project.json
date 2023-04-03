@@ -47,10 +47,21 @@
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "commitMessageFormat": "chore(${projectName}): release version ${version}"
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "postTargets": [
+          "universal-grid:deploy:npm",
+          "universal-grid:deploy:github"
+        ]
       }
     },
-    "deploy": {
+    "deploy:github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}"
+      }
+    },
+    "deploy:npm": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "access": "public"
