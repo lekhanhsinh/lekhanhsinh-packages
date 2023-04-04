@@ -1,18 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { type NodeClass } from '../Node/types'
 import { PART_RELATIONS, PART_TYPE, type SHAPE } from '../constants'
 import {
   type PartCoordinates,
   type CubeCoordinates,
-  type EdgeCoordinates,
+  type PartClass,
 } from '../types'
 import { concat, fromCoordinates, repeat, repeatWith } from './traversers'
-import {
-  type PartConstructor,
-  type PartClass,
-  type Traverser,
-  type Traversable,
-} from './types'
+import { type PartConstructor, type Traverser, type Traversable } from './types'
 
 export class Grid<T extends PartClass>
   extends Map<string, T>
@@ -41,10 +35,8 @@ export class Grid<T extends PartClass>
     return (this.#partClass as any).shape
   }
 
-  #getAllParts(
-    grid: Grid<PartClass>
-  ): Array<CubeCoordinates | EdgeCoordinates> {
-    let results: Array<CubeCoordinates | EdgeCoordinates> = []
+  #getAllParts(grid: Grid<PartClass>): CubeCoordinates[] {
+    let results: CubeCoordinates[] = []
     const relation = PART_RELATIONS.get(`${grid.type},${this.type}`)
     const relation1 = PART_RELATIONS.get(`${this.type},${grid.type}`)
     if (relation == null || relation1 == null) {
@@ -60,7 +52,7 @@ export class Grid<T extends PartClass>
       results = results.filter((n) => {
         const parts: any[] = Array.from(
           (
-            new (this.#partClass as PartConstructor<NodeClass>)(n) as Record<
+            new (this.#partClass as PartConstructor<PartClass>)(n) as Record<
               string,
               any
             >

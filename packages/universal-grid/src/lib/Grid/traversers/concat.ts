@@ -1,4 +1,5 @@
-import { type PartClass, type Traverser } from '../types'
+import { type PartClass } from '../../types'
+import { type Traverser } from '../types'
 
 // prettier-ignore
 export function concat<T extends PartClass>(traversers: Array<Traverser<T>>): Traverser<T>

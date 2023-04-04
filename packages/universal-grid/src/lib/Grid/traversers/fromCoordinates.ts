@@ -1,6 +1,6 @@
-import { type PartCoordinates } from '../../types'
+import { type PartClass, type PartCoordinates } from '../../types'
 import { isTuple } from '../../utils'
-import { type PartClass, type Traverser } from '../types'
+import { type Traverser } from '../types'
 
 // prettier-ignore
 export function fromCoordinates<T extends PartClass>(coordinates: Array<PartCoordinates<T>>): Traverser<T>

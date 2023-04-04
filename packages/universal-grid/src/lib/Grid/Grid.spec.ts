@@ -1,10 +1,14 @@
 import { describe, it, expect, vi } from 'vitest'
 import { Grid } from './Grid'
-import { type NodeClass, defineSquare } from '../Node'
-import { type EdgeClass, defineEdgeSquare } from '../Edge'
-import { type VertexClass, defineVertexSquare } from '../Vertex'
 import { DIRECTION, PART_TYPE } from '../constants'
-import { type Traverser } from './types'
+import {
+  type NodeSquare,
+  defineEdgeSquare,
+  defineSquare,
+  defineVertexSquare,
+  type EdgeSquare,
+  type VertexSquare,
+} from '../Square'
 
 describe('Grid', () => {
   it('create instance', () => {
@@ -95,7 +99,19 @@ describe('Grid', () => {
       [2, 2, 0],
       [2, 1, 0],
     ])
-    const traverser = Grid.fromCoordinates(
+    const traverserNode = Grid.fromCoordinates<NodeSquare>(
+      [5, 1, 0],
+      [1, 2, 0],
+      [3, 2, 0],
+      [2, 1, 0]
+    )
+    const traverserEdge = Grid.fromCoordinates<EdgeSquare>(
+      [5, 1, 0, DIRECTION.N],
+      [1, 2, 0, DIRECTION.W],
+      [3, 2, 0, DIRECTION.N],
+      [2, 1, 0, DIRECTION.W]
+    )
+    const traverserVertex = Grid.fromCoordinates<VertexSquare>(
       [5, 1, 0],
       [1, 2, 0],
       [3, 2, 0],
@@ -104,18 +120,14 @@ describe('Grid', () => {
     const getNode = vi.spyOn(gridNode, 'get')
     const getEdge = vi.spyOn(gridEdge, 'get')
     const getVertex = vi.spyOn(gridVertex, 'get')
-    expect(gridNode.traverse(traverser as Traverser<NodeClass>)).not.toBe(
-      gridNode
-    )
+    expect(gridNode.traverse(traverserNode)).not.toBe(gridNode)
     expect(getNode).toBeCalledTimes(4)
 
-    expect(
-      gridEdge.traverse(traverser as Traverser<EdgeClass>, { bail: true })
-    ).not.toBe(gridEdge)
+    expect(gridEdge.traverse(traverserEdge, { bail: true })).not.toBe(gridEdge)
     expect(getEdge).toBeCalledTimes(1)
 
     expect(
-      gridVertex.traverse(traverser as Traverser<VertexClass>, {
+      gridVertex.traverse(traverserVertex, {
         reverse: true,
         bail: true,
       })

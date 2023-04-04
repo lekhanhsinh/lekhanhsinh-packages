@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { concat } from './concat'
 import { type PartCoordinates } from '../../types'
-import { Square, type NodeSquare } from '../../Node'
+import { Square, type NodeSquare } from '../../Square'
 
 const cursor = new Square([2, 3, 0])
 const create = (coordinates?: PartCoordinates<NodeSquare>): NodeSquare =>

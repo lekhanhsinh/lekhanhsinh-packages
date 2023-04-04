@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { fromCoordinates } from './fromCoordinates'
 import { type PartCoordinates } from '../../types'
-import { Square, type NodeSquare } from '../../Node'
+import { Square, type NodeSquare } from '../../Square'
 
 const cursor = new Square([2, 3, 0])
 const create = (coordinates?: PartCoordinates<NodeSquare>): NodeSquare =>

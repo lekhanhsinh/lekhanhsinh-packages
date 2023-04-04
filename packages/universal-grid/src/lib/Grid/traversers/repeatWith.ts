@@ -1,4 +1,5 @@
-import { type Traverser, type PartClass } from '../types'
+import { type PartClass } from '../../types'
+import { type Traverser } from '../types'
 import { concat } from './concat'
 
 export const repeatWith = <T extends PartClass>(
