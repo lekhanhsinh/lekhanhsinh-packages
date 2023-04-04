@@ -7,10 +7,10 @@ export const toPixel = (
   { size: { width, height }, anchor, inverse }: SquareSettings
 ): Omit<PointCoordinates, 'direction'> => {
   const x = !inverse.x
-    ? (q + (direction === DIRECTION.N ? 0.5 : 0) + anchor.x) * width
-    : -(q - (direction === DIRECTION.N ? 0.5 : 0) - anchor.x) * width
+    ? (q + Math.sin(direction) / 2 + anchor.x) * width
+    : -(q - Math.sin(direction) / 2 - anchor.x) * width
   const y = !inverse.y
-    ? (r + (direction === DIRECTION.W ? 0.5 : 0) + anchor.y) * height
-    : -(r - (direction === DIRECTION.W ? 0.5 : 0) - anchor.y) * height
+    ? (r - Math.cos(direction) / 2 + anchor.y) * height
+    : -(r + Math.cos(direction) / 2 - anchor.y) * height
   return { x, y }
 }
