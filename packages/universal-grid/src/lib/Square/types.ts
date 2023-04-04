@@ -28,8 +28,8 @@ export type PartSquareCoordinates<T extends SquarePartClass> =
         | Partial<CubeCoordinates>
     : T extends NodeSquare | VertexSquare
     ?
-        | Omit<PointCoordinates, 'direction'>
-        | Omit<OffsetCoordinates, 'direction'>
-        | Omit<TupleCoordinates, 'direction'>
-        | Omit<CubeCoordinates, 'direction'>
+        | Omit<Partial<PointCoordinates>, 'direction'>
+        | Omit<Partial<OffsetCoordinates>, 'direction'>
+        | Omit<Partial<TupleCoordinates>, 'direction'>
+        | Omit<Partial<CubeCoordinates>, 'direction'>
     : never
