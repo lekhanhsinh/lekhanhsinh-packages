@@ -71,7 +71,8 @@ export class EdgeSquare
     this.#values = [q, r, s, direction]
     if (![DIRECTION.N, DIRECTION.W].includes(this.direction)) {
       throw new Error(
-        `Invalid EdgeSquare direction: EdgeSquare direction is DIRECTION.N | DIRECTION.W. Received: ${this.direction}`
+        `Invalid EdgeSquare direction: EdgeSquare direction is DIRECTION.N | DIRECTION.W.
+          Received: ${this.direction}`
       )
     }
   }

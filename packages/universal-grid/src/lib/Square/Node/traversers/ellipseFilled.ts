@@ -4,6 +4,7 @@ import {
   type CubeCoordinates,
   type Ellipse,
 } from '../../../types'
+import { isNumber } from '../../../utils/checkers/isNumber'
 import { type NodeSquare } from '../NodeSquare'
 
 export function ellipseFilled(options: {
@@ -15,8 +16,8 @@ export function ellipseFilled(options: {
     const first = center != null ? create(center) : cursor ?? create()
     const includeStart = center != null || cursor == null
     let _radius = radius as Ellipse
-    if (Number.isFinite(radius)) {
-      _radius = { xRadius: radius as number, yRadius: radius as number }
+    if (isNumber(radius)) {
+      _radius = { xRadius: radius, yRadius: radius }
     }
     const results = ellipseFilledNormal(first, _radius, { includeStart })
 

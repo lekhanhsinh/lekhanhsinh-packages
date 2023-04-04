@@ -1,5 +1,6 @@
 export const SQRT3 = Math.sqrt(3)
 export const SQRT3_2 = Math.sqrt(3) / 2
+export const SQRT3_3 = Math.sqrt(3) / 3
 
 export enum PART_TYPE {
   NODE = 'Node',

@@ -1,4 +1,5 @@
 import { type BoundingBox, type Ellipse } from '../types'
+import { isNumber } from '../utils/checkers/isNumber'
 
 export const createSquareBoundingBox = (
   input: number | BoundingBox | Ellipse
@@ -22,10 +23,10 @@ export const createSquareBoundingBox = (
     return { width: xRadius * Math.SQRT2, height: yRadius * Math.SQRT2 }
   }
 
-  if (Number.isFinite(input)) {
+  if (isNumber(input)) {
     return {
-      width: (input as number) * Math.SQRT2,
-      height: (input as number) * Math.SQRT2,
+      width: input * Math.SQRT2,
+      height: input * Math.SQRT2,
     }
   }
 

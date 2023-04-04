@@ -3,7 +3,7 @@ import { type CubeCoordinates, type PointCoordinates } from '../../../types'
 import { type SquareSettings } from '../../types'
 
 export const toPixel = (
-  { q, r, direction }: Required<CubeCoordinates>,
+  { q = 0, r = 0, direction = DIRECTION.N }: Partial<CubeCoordinates>,
   { size: { width, height }, anchor, inverse }: SquareSettings
 ): Omit<PointCoordinates, 'direction'> => {
   const x = !inverse.x
