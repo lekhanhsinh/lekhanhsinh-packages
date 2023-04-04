@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { defineSquare } from './defineSquare'
+import { defineSquare } from './defineNodeSquare'
 import { type SquareOptions } from '../types'
 import { defaultSquareSettings } from '..'
 

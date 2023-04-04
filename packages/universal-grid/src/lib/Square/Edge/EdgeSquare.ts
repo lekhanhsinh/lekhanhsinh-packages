@@ -66,10 +66,7 @@ export class EdgeSquare
     return this.#values[3]
   }
 
-  constructor(coordinates?: PartCoordinates<EdgeSquare>)
-  constructor(
-    coordinates: PartCoordinates<EdgeSquare> = [0, 0, 0, DIRECTION.N]
-  ) {
+  constructor(coordinates: PartCoordinates<EdgeSquare> = [0, 0, 0]) {
     const { q, r, s, direction } = toCube(coordinates, this)
     this.#values = [q, r, s, direction]
     if (![DIRECTION.N, DIRECTION.W].includes(this.direction)) {

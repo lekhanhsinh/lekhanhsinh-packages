@@ -1,2 +1,2 @@
 export { VertexSquare } from './VertexSquare'
-export * from './defineSquare'
+export * from './defineVertexSquare'

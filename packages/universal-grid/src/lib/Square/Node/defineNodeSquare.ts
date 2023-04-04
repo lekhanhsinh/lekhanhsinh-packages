@@ -3,11 +3,11 @@ import { createSquareBoundingBox, defaultSquareSettings } from '..'
 import { NodeSquare } from './NodeSquare'
 
 export const defineNodeSquare = (
-  squareOptions?: SquareOptions
+  options?: SquareOptions
 ): typeof NodeSquare => {
   const { size, anchor, inverse } = {
     ...defaultSquareSettings,
-    ...squareOptions,
+    ...options,
   }
 
   const settings = { size: createSquareBoundingBox(size), anchor, inverse }

@@ -4,11 +4,11 @@ import { type SquareOptions, type SquareSettings } from '../types'
 import { VertexSquare } from './VertexSquare'
 
 export const defineVertexSquare = (
-  squareOptions?: SquareOptions
+  options?: SquareOptions
 ): typeof VertexSquare => {
   const { size, anchor, inverse } = {
     ...defaultSquareSettings,
-    ...squareOptions,
+    ...options,
   }
 
   const settings = { size: createSquareBoundingBox(size), anchor, inverse }

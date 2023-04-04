@@ -3,11 +3,11 @@ import { type SquareOptions, type SquareSettings } from '../types'
 import { EdgeSquare } from './EdgeSquare'
 
 export const defineEdgeSquare = (
-  squareOptions?: SquareOptions
+  options?: SquareOptions
 ): typeof EdgeSquare => {
   const { size, anchor, inverse } = {
     ...defaultSquareSettings,
-    ...squareOptions,
+    ...options,
   }
 
   const settings = { size: createSquareBoundingBox(size), anchor, inverse }

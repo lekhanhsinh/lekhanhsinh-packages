@@ -1,2 +1,2 @@
 export { EdgeSquare } from './EdgeSquare'
-export * from './defineSquare'
+export * from './defineEdgeSquare'
