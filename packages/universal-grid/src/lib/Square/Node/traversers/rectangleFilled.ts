@@ -6,7 +6,7 @@ import {
   type Ellipse,
   type CubeCoordinates,
 } from '../../../types'
-import { isNumber } from '../../../utils/checkers/isNumber'
+import { isFiniteNumber } from '../../../utils/checkers/isFiniteNumber'
 import { radiansToVector } from '../../../utils/maths/radiansToVector'
 import { type NodeSquare } from '../NodeSquare'
 import { lineWalk, lineWalkVector } from './lineWalk'
@@ -57,7 +57,7 @@ export function rectangleFilled(options: {
       const includeStart = center != null || cursor == null
       const first = center != null ? create(center) : cursor ?? create()
       let _radius = radius as Ellipse
-      if (isNumber(radius)) {
+      if (isFiniteNumber(radius)) {
         _radius = { xRadius: radius, yRadius: radius }
       }
       if (spiral) {

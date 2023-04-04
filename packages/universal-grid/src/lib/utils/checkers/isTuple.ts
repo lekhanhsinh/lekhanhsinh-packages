@@ -1,5 +1,5 @@
 import { type TupleCoordinates } from '../../types'
-import { isNumber } from './isNumber'
+import { isFiniteNumber } from './isFiniteNumber'
 
 export const isTuple = (value: unknown): value is TupleCoordinates => {
   if (!Array.isArray(value)) return false
@@ -7,19 +7,19 @@ export const isTuple = (value: unknown): value is TupleCoordinates => {
   let result = false
   if (value[0] != null) {
     result = true
-    if (!isNumber(value[0])) {
+    if (!isFiniteNumber(value[0])) {
       return false
     }
   }
   if (value[1] != null) {
     result = true
-    if (!isNumber(value[1])) {
+    if (!isFiniteNumber(value[1])) {
       return false
     }
   }
   if (value[2] != null) {
     result = true
-    if (!isNumber(value[2])) {
+    if (!isFiniteNumber(value[2])) {
       return false
     }
   }

@@ -1,4 +1,5 @@
 import { type PointCoordinates } from '../../types'
+import { isFiniteNumber } from './isFiniteNumber'
 
 export const isPoint = (value: unknown): value is PointCoordinates => {
   if (typeof value !== 'object' || value == null) return false
@@ -6,13 +7,13 @@ export const isPoint = (value: unknown): value is PointCoordinates => {
   let result = false
   if ((value as PointCoordinates).x != null) {
     result = true
-    if (!Number.isFinite((value as PointCoordinates).x)) {
+    if (!isFiniteNumber((value as PointCoordinates).x)) {
       return false
     }
   }
   if ((value as PointCoordinates).y != null) {
     result = true
-    if (!Number.isFinite((value as PointCoordinates).y)) {
+    if (!isFiniteNumber((value as PointCoordinates).y)) {
       return false
     }
   }
