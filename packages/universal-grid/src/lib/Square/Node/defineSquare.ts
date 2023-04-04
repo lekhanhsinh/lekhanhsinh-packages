@@ -1,6 +1,6 @@
 import { type SquareOptions, type SquareSettings } from '../types'
 import { createSquareBoundingBox, defaultSquareSettings } from '..'
-import { NodeSquare } from './Square'
+import { NodeSquare } from './NodeSquare'
 
 export const defineNodeSquare = (
   squareOptions?: SquareOptions

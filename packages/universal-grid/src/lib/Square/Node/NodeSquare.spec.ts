@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Square } from './Square'
+import { Square } from './NodeSquare'
 import {
   type PointCoordinates,
   type CubeCoordinates,

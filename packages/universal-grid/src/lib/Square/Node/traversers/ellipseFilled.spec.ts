@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { ellipseFilled } from './ellipseFilled'
 import { type PartCoordinates } from '../../../types'
-import { NodeSquare } from '../Square'
+import { NodeSquare } from '../NodeSquare'
 
 const cursor = new NodeSquare([1, 2, 0])
 const create = vi.fn(

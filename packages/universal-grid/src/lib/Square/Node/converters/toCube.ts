@@ -1,7 +1,7 @@
 import { type PartCoordinates, type CubeCoordinates } from '../../../types'
 import { isCube, isOffset, isPoint, isTuple, tupleToCube } from '../../../utils'
 import { type SquareSettings } from '../../types'
-import { type NodeSquare } from '../Square'
+import { type NodeSquare } from '../NodeSquare'
 import { fromPixel } from './fromPixel'
 
 export const toCube = (

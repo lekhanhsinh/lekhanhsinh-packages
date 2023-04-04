@@ -7,7 +7,7 @@ import {
   type CubeCoordinates,
 } from '../../../types'
 import { radiansToVector } from '../../../utils/maths/radiansToVector'
-import { type NodeSquare } from '../Square'
+import { type NodeSquare } from '../NodeSquare'
 import { lineWalk, lineWalkVector } from './lineWalk'
 
 // prettier-ignore

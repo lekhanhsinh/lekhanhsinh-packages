@@ -4,7 +4,7 @@ import {
   type CubeCoordinates,
   type Ellipse,
 } from '../../../types'
-import { type NodeSquare } from '../Square'
+import { type NodeSquare } from '../NodeSquare'
 
 export function ellipseFilled(options: {
   center?: PartCoordinates<NodeSquare>

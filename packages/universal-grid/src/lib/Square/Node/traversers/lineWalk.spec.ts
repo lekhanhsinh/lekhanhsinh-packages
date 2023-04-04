@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { lineWalk } from './lineWalk'
 import { type PartCoordinates } from '../../../types'
-import { NodeSquare } from '../Square'
+import { NodeSquare } from '../NodeSquare'
 import { DIRECTION } from '../../../constants'
 
 const cursor = new NodeSquare([1, 2, 0])
