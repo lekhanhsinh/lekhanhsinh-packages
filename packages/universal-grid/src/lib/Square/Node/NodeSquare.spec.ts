@@ -23,8 +23,8 @@ describe('Square', () => {
       s: 0,
     })
     expect(new Square({ x: 64, y: 64 })).toContain<CubeCoordinates>({
-      q: 1,
-      r: 1,
+      q: 2,
+      r: 2,
       s: 0,
     })
   })
