@@ -23,7 +23,46 @@ const Edge = defineEdgeSquare(settings)
 const Vertex = defineVertexSquare(settings)
 
 // 3. Create a grid
-const gridNode = new Grid(Node, [[1, 1, 0],[1, 2, 0],[2, 2, 0],[2, 1, 0]])
+const gridNode = new Grid(Node, Node.rectangleFilled({ direction: DIRECTION.N, size: { width: 10, height: 10 } }))
 const gridEdge = new Grid(Edge, gridNode)
 const gridVertex = new Grid(Vertex, gridNode)
 ```
+
+## Content
+
+### Shape
+
+|          |        Node        |        Edge        |       Vertex       |
+|:--------:|:------------------:|:------------------:|:------------------:|
+|  Square  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|  Hexagon |                    |                    |                    |
+| Triangel |                    |                    |                    |
+
+### Traversers
+
+#### Square
+
+##### Node
+### Traversers
+
+#### Square
+
+##### Node
+* lineWalk
+```javascript
+    Node.lineWalk({ start: [0, 0, 0], stop: [10, 10, 10] })
+    Node.lineWalk({ start: [0, 0, 0], direction: DIRECTION.SE, length: 10 })
+```
+* ellipseFilled
+```javascript
+    Node.ellipseFilled({ center: [0, 0, 0], radius: { xRadius: 10, yRadius: 10 } })
+    Node.lineWalk({ start: [0, 0, 0], direction: DIRECTION.SE, length: 10 })
+```
+* rectangleFilled
+```javascript
+    Node.rectangleFilled({ start: [0, 0, 0], direction: DIRECTION.N, size: { width: 10, height: 10 } })
+    Node.rectangleFilled({ center: [0, 0, 0], radius: { xRadius: 10, yRadius: 10 } })
+    Node.rectangleFilled({ center: [0, 0, 0], radius: { xRadius: 10, yRadius: 10 }, spiral: true, startDirection: DIRECTION.N })
+```
+    
+    
