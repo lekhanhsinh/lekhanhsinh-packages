@@ -6,7 +6,7 @@ import {
   type PartCoordinates,
 } from '../../types'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
-import { toCube, toPixel } from './converters'
+import { fromPixel, toCube, toPixel } from './converters'
 import { ellipseFilled, lineWalk, rectangleFilled } from './traversers'
 import { defaultSquareSettings } from '..'
 
@@ -16,6 +16,8 @@ export class NodeSquare
     Readonly<Omit<CubeCoordinates, 'direction'>>,
     Readonly<OffsetCoordinates>
 {
+  static fromPixel = fromPixel
+
   static lineWalk = lineWalk
   static rectangleFilled = rectangleFilled
   static ellipseFilled = ellipseFilled

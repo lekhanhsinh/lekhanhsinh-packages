@@ -5,11 +5,15 @@ export const fromPixel = (
   { x = 0, y = 0 }: Omit<Partial<PointCoordinates>, 'direction'>,
   { size: { width, height }, anchor, inverse }: SquareSettings
 ): Omit<CubeCoordinates, 'direction'> => {
-  const q = !inverse.x
-    ? Math.floor(x / width - anchor.x)
-    : Math.floor(-x / width + anchor.x)
-  const r = !inverse.y
-    ? Math.floor(y / height - anchor.y)
-    : Math.floor(-y / height + anchor.y)
+  let q = !inverse.x
+    ? Math.round(x / width - anchor.x)
+    : Math.round(-x / width + anchor.x)
+  let r = !inverse.y
+    ? Math.round(y / height - anchor.y)
+    : Math.round(-y / height + anchor.y)
+
+  // to avoid -0
+  q += 0
+  r += 0
   return { q, r, s: 0 }
 }

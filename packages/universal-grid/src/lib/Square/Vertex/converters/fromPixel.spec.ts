@@ -34,7 +34,7 @@ describe('fromPixel', () => {
         inverse: { x: false, y: false },
       }
     )
-  ).toEqual({ q: 24, r: 24, s: 0 })
+  ).toEqual({ q: 25, r: 25, s: 0 })
 
   expect(
     fromPixel(
@@ -56,5 +56,5 @@ describe('fromPixel', () => {
         inverse: { x: false, y: true },
       }
     )
-  ).toEqual({ q: 24, r: -25, s: 0 })
+  ).toEqual({ q: 25, r: -25, s: 0 })
 })
