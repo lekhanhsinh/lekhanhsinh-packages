@@ -16,7 +16,7 @@ export function rectangleFilled(options: { center?: PartCoordinates<NodeSquare>,
 // prettier-ignore
 export function rectangleFilled(options: { start?: PartCoordinates<NodeSquare>, direction: number, size: BoundingBox }): Traverser<NodeSquare>
 // prettier-ignore
-export function rectangleFilled(options: { start?: PartCoordinates<NodeSquare>, radius: number | Ellipse, spiral: boolean, startDirection?: number }): Traverser<NodeSquare>
+export function rectangleFilled(options: { center?: PartCoordinates<NodeSquare>, radius: number | Ellipse, spiral: boolean, startDirection?: number }): Traverser<NodeSquare>
 export function rectangleFilled(options: {
   start?: PartCoordinates<NodeSquare>
   center?: PartCoordinates<NodeSquare>
