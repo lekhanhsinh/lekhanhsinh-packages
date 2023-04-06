@@ -15,7 +15,7 @@ describe('defineEdgeSquare', () => {
   it('returns a class has custom settings', () => {
     const settings: SquareOptions = {
       size: { width: 100, height: 100 },
-      anchor: { x: 1, y: 1 },
+      origin: { x: 1, y: 1 },
       inverse: { x: false, y: true },
     }
     const VertexSquare = defineEdgeSquare(settings)

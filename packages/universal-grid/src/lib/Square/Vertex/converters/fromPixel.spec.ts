@@ -7,7 +7,7 @@ describe('fromPixel', () => {
         { x: 0, y: 0 },
         {
           size: { width: 50, height: 50 },
-          anchor: { x: 0, y: 0 },
+          origin: { x: 0, y: 0 },
           inverse: { x: false, y: false },
         }
       )
@@ -18,7 +18,7 @@ describe('fromPixel', () => {
         { x: 100, y: 100 },
         {
           size: { width: 50, height: 50 },
-          anchor: { x: 0, y: 0 },
+          origin: { x: 0, y: 0 },
           inverse: { x: false, y: false },
         }
       )
@@ -30,7 +30,7 @@ describe('fromPixel', () => {
       { x: 1234, y: 1234 },
       {
         size: { width: 50, height: 50 },
-        anchor: { x: 0, y: 0 },
+        origin: { x: 0, y: 0 },
         inverse: { x: false, y: false },
       }
     )
@@ -41,7 +41,7 @@ describe('fromPixel', () => {
       { x: 100, y: 100 },
       {
         size: { width: 50, height: 50 },
-        anchor: { x: 0, y: 0 },
+        origin: { x: 0, y: 0 },
         inverse: { x: false, y: true },
       }
     )
@@ -52,7 +52,7 @@ describe('fromPixel', () => {
       { x: 1234, y: 1234 },
       {
         size: { width: 50, height: 50 },
-        anchor: { x: 0, y: 0 },
+        origin: { x: 0, y: 0 },
         inverse: { x: false, y: true },
       }
     )

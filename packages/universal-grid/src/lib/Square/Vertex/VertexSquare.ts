@@ -1,7 +1,6 @@
 import { defaultSquareSettings } from '..'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
 import {
-  type BoundingBox,
   type PointCoordinates,
   type CubeCoordinates,
   type PartCoordinates,
@@ -27,12 +26,12 @@ export class VertexSquare
     return defaultSquareSettings
   }
 
-  get size(): BoundingBox {
+  get size(): SquareSettings['size'] {
     return (this.constructor as typeof VertexSquare).settings.size
   }
 
-  get anchor(): PointCoordinates {
-    return (this.constructor as typeof VertexSquare).settings.anchor
+  get origin(): SquareSettings['origin'] {
+    return (this.constructor as typeof VertexSquare).settings.origin
   }
 
   get inverse(): { x: boolean; y: boolean } {

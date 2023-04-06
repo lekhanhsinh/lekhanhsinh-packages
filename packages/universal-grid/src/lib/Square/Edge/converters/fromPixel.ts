@@ -4,14 +4,12 @@ import { type SquareSettings } from '../../types'
 
 export const fromPixel = (
   { x = 0, y = 0, direction }: Partial<PointCoordinates>,
-  { size: { width, height }, anchor, inverse }: SquareSettings
+  { size: { width, height }, origin, inverse }: SquareSettings
 ): Required<CubeCoordinates> => {
-  const sq = !inverse.x
-    ? x / width - 0.5 - anchor.x
-    : -x / width + 0.5 + anchor.x
-  const sr = !inverse.y
-    ? y / height - 0.5 - anchor.y
-    : -y / height + 0.5 + anchor.y
+  const _x = inverse.x ? -x : x
+  const _y = inverse.y ? -y : y
+  const sq = (_x - origin.x) / width
+  const sr = (_y - origin.y) / height
   let q = Math.round(sq)
   let r = Math.round(sr)
 

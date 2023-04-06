@@ -8,7 +8,7 @@ describe('toPixel', () => {
         { q: -1, r: -1, s: 0, direction: DIRECTION.N },
         {
           size: { width: 50, height: 50 },
-          anchor: { x: 0, y: 0 },
+          origin: { x: 0, y: 0 },
           inverse: { x: false, y: false },
         }
       )
@@ -21,7 +21,7 @@ describe('toPixel', () => {
         { q: 1, r: 1, s: 0, direction: DIRECTION.W },
         {
           size: { width: 50, height: 50 },
-          anchor: { x: 0, y: 0 },
+          origin: { x: 0, y: 0 },
           inverse: { x: false, y: false },
         }
       )
@@ -34,7 +34,7 @@ describe('toPixel', () => {
         { q: 2, r: -2, s: 0, direction: DIRECTION.W },
         {
           size: { width: 50, height: 50 },
-          anchor: { x: 0, y: 0 },
+          origin: { x: 0, y: 0 },
           inverse: { x: false, y: true },
         }
       )

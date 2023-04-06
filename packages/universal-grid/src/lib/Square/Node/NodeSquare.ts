@@ -36,8 +36,8 @@ export class NodeSquare
     return (this.constructor as typeof NodeSquare).settings.size
   }
 
-  get anchor(): SquareSettings['anchor'] {
-    return (this.constructor as typeof NodeSquare).settings.anchor
+  get origin(): SquareSettings['origin'] {
+    return (this.constructor as typeof NodeSquare).settings.origin
   }
 
   get inverse(): SquareSettings['inverse'] {

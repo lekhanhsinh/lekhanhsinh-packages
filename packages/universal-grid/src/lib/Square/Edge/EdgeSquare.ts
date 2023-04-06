@@ -31,8 +31,8 @@ export class EdgeSquare
     return (this.constructor as typeof EdgeSquare).settings.size
   }
 
-  get anchor(): SquareSettings['anchor'] {
-    return (this.constructor as typeof EdgeSquare).settings.anchor
+  get origin(): SquareSettings['origin'] {
+    return (this.constructor as typeof EdgeSquare).settings.origin
   }
 
   get inverse(): SquareSettings['inverse'] {

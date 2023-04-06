@@ -6,7 +6,7 @@ export * from './createSquareBoundingBox'
 export * from './types'
 
 export const defaultSquareSettings: Required<SquareSettings> = {
-  anchor: { x: 0, y: 0 },
+  origin: { x: 0, y: 0 },
   size: { width: 32, height: 32 },
   inverse: { x: false, y: false },
 }

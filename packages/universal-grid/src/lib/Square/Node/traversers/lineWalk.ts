@@ -83,15 +83,15 @@ export const lineWalkVector = (
 export const lineWalkBetweenPoint = (
   start: Omit<PointCoordinates, 'direction'>,
   stop: Omit<PointCoordinates, 'direction'>,
-  { size: { width, height }, anchor }: SquareSettings,
+  { size: { width, height }, origin }: SquareSettings,
   options?: { includeStart: boolean }
 ): Array<Omit<CubeCoordinates, 'direction'>> => {
   const { includeStart = true } = options ?? {}
   const results: Array<Omit<CubeCoordinates, 'direction'>> = []
-  const x1 = (start.x - anchor.x) / width
-  const y1 = (start.y - anchor.y) / height
-  const x2 = (stop.x - anchor.x) / width
-  const y2 = (stop.y - anchor.y) / height
+  const x1 = (start.x - origin.x) / width
+  const y1 = (start.y - origin.y) / height
+  const x2 = (stop.x - origin.x) / width
+  const y2 = (stop.y - origin.y) / height
   const dq = x2 - x1
   const dr = y2 - y1
   let q = Math.floor(x1)

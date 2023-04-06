@@ -1,16 +1,17 @@
 import { createSquareBoundingBox, defaultSquareSettings } from '..'
+import { createOrigin } from '../../utils'
 import { type SquareOptions, type SquareSettings } from '../types'
 import { EdgeSquare } from './EdgeSquare'
 
 export const defineEdgeSquare = (
   options?: SquareOptions
 ): typeof EdgeSquare => {
-  const { size, anchor, inverse } = {
-    ...defaultSquareSettings,
-    ...options,
-  }
+  let { size, origin, inverse } = { ...defaultSquareSettings, ...options }
 
-  const settings = { size: createSquareBoundingBox(size), anchor, inverse }
+  size = createSquareBoundingBox(size)
+  origin = createOrigin(origin, size)
+
+  const settings = { inverse, size, origin }
 
   return class extends EdgeSquare {
     static override get settings(): SquareSettings {

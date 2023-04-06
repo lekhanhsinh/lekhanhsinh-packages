@@ -16,13 +16,21 @@ export enum SHAPE {
 
 export enum DIRECTION {
   E = 0,
+  NEE = (1 / 6) * Math.PI,
   NE = (1 / 4) * Math.PI,
+  NNE = (1 / 3) * Math.PI,
   N = (1 / 2) * Math.PI,
+  NNW = (2 / 3) * Math.PI,
   NW = (3 / 4) * Math.PI,
+  NWW = (5 / 6) * Math.PI,
   W = Math.PI,
+  SWW = (7 / 6) * Math.PI,
   SW = (5 / 4) * Math.PI,
+  SSW = (4 / 3) * Math.PI,
   S = (3 / 2) * Math.PI,
+  SSE = (5 / 3) * Math.PI,
   SE = (7 / 4) * Math.PI,
+  SEE = (11 / 6) * Math.PI,
 }
 
 export const PART_RELATIONS = new Map<string, string>([

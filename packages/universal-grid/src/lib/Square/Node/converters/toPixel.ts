@@ -3,13 +3,9 @@ import { type SquareSettings } from '../../types'
 
 export const toPixel = (
   { q = 0, r = 0 }: Omit<Partial<CubeCoordinates>, 'direction'>,
-  { size: { width, height }, anchor, inverse }: SquareSettings
+  { size: { width, height }, origin, inverse }: SquareSettings
 ): Omit<PointCoordinates, 'direction'> => {
-  const x = !inverse.x
-    ? (q + 0.5 + anchor.x) * width
-    : -(q - 0.5 - anchor.x) * width
-  const y = !inverse.y
-    ? (r + 0.5 + anchor.y) * height
-    : -(r - 0.5 - anchor.y) * height
-  return { x, y }
+  const x = q * width + origin.x
+  const y = r * height + origin.y
+  return { x: inverse.x ? -x : x, y: inverse.y ? -y : y }
 }

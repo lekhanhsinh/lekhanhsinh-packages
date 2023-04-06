@@ -59,8 +59,13 @@ export interface BoundingBox {
 
 export interface PartSettings {
   size: BoundingBox
-  anchor: PointCoordinates
+  origin: Omit<PointCoordinates, 'direction'>
   offset: 1 | -1
   isPointy: boolean
   inverse: { x: boolean; y: boolean }
+}
+
+export interface AddtionOptions {
+  size?: number | Ellipse | BoundingBox
+  origin?: string | Omit<PointCoordinates, 'direction'> | Ellipse
 }
