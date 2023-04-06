@@ -23,5 +23,10 @@ export const isTuple = (value: unknown): value is TupleCoordinates => {
       return false
     }
   }
+  if (value[3] != null) {
+    if (!isFiniteNumber(value[3])) {
+      return false
+    }
+  }
   return result
 }

@@ -9,6 +9,7 @@ import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
 import { fromPixel, toCube, toPixel } from './converters'
 import { ellipseFilled, lineWalk, rectangleFilled } from './traversers'
 import { defaultSquareSettings } from '..'
+import { cubeToString } from '../../utils'
 
 export class NodeSquare
   implements
@@ -75,7 +76,7 @@ export class NodeSquare
   }
 
   toString(): string {
-    return JSON.stringify({ q: this.q, r: this.r, s: this.s })
+    return cubeToString(this)
   }
 
   neighbor(

@@ -4,6 +4,8 @@ describe('isCube', () => {
   it('check object is a CubeCoordinates', () => {
     expect(isCube({ q: 0, r: 0, s: 0 })).toEqual(true)
     expect(isCube({ q: 0, r: 0 })).toEqual(true)
+    expect(isCube({ q: 0, r: 0, direction: 0 })).toEqual(true)
+    expect(isCube({ q: 0, r: 0, direction: NaN })).toEqual(false)
     expect(isCube({ q: NaN, r: 0, s: 0 })).toEqual(false)
     expect(isCube({ x: 0, y: 0 })).toEqual(false)
     expect(isCube({ col: 0, row: 0 })).toEqual(false)

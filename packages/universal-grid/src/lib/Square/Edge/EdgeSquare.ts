@@ -6,6 +6,7 @@ import {
   type PartCoordinates,
   type OffsetCoordinates,
 } from '../../types'
+import { cubeToString } from '../../utils'
 import { type SquareSettings } from '../types'
 import { fromPixel, toCube, toPixel } from './converters'
 
@@ -80,12 +81,7 @@ export class EdgeSquare
   }
 
   toString(): string {
-    return JSON.stringify({
-      q: this.q,
-      r: this.r,
-      s: this.s,
-      direction: this.direction,
-    })
+    return cubeToString(this)
   }
 
   continue(direction: DIRECTION): Required<CubeCoordinates> | undefined {

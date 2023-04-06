@@ -17,5 +17,10 @@ export const isPoint = (value: unknown): value is PointCoordinates => {
       return false
     }
   }
+  if ((value as PointCoordinates).direction != null) {
+    if (!isFiniteNumber((value as PointCoordinates).direction)) {
+      return false
+    }
+  }
   return result
 }

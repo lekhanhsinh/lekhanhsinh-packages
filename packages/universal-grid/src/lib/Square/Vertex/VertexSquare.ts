@@ -7,6 +7,7 @@ import {
   type PartCoordinates,
   type OffsetCoordinates,
 } from '../../types'
+import { cubeToString } from '../../utils'
 import { type SquareSettings } from '../types'
 import { fromPixel, toCube, toPixel } from './converters'
 
@@ -70,7 +71,7 @@ export class VertexSquare
   }
 
   toString(): string {
-    return JSON.stringify({ q: this.q, r: this.r, s: this.s })
+    return cubeToString(this)
   }
 
   touche(direction: DIRECTION): Omit<CubeCoordinates, 'direction'> | undefined {

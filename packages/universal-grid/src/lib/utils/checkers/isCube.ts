@@ -23,5 +23,10 @@ export const isCube = (value: unknown): value is CubeCoordinates => {
       return false
     }
   }
+  if ((value as CubeCoordinates).direction != null) {
+    if (!isFiniteNumber((value as CubeCoordinates).direction)) {
+      return false
+    }
+  }
   return result
 }

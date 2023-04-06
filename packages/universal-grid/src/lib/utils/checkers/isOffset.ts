@@ -17,5 +17,10 @@ export const isOffset = (value: unknown): value is OffsetCoordinates => {
       return false
     }
   }
+  if ((value as OffsetCoordinates).direction != null) {
+    if (!isFiniteNumber((value as OffsetCoordinates).direction)) {
+      return false
+    }
+  }
   return result
 }

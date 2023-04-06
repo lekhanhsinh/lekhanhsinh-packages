@@ -4,4 +4,6 @@ export const cubeToTuple = ({
   q = 0,
   r = 0,
   s = 0,
-}: Partial<CubeCoordinates>): TupleCoordinates => [q, r, s]
+  direction,
+}: Partial<CubeCoordinates>): TupleCoordinates =>
+  direction != null ? [q, r, s, direction] : [q, r, s]
