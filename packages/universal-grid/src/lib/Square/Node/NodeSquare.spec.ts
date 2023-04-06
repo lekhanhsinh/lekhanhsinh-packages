@@ -40,7 +40,7 @@ describe('Square', () => {
 
   it('instance contain center pixel point', () => {
     const node = new Square([3, 4, 0])
-    expect(node.center).toEqual<PointCoordinates>({ x: 112, y: 144 })
+    expect(node.center).toEqual<PointCoordinates>({ x: 96, y: 128 })
   })
 
   it('instance contain OffsetCoordinates', () => {

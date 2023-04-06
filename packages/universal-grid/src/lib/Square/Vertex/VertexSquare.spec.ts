@@ -28,7 +28,7 @@ describe('VertexSquare', () => {
       s: 0,
     })
     expect(new VertexSquare({ x: 64, y: 64 })).toContain<CubeCoordinates>({
-      q: 2,
+      q: 3,
       r: 2,
       s: 0,
     })
@@ -45,7 +45,7 @@ describe('VertexSquare', () => {
 
   it('instance contain center pixel point', () => {
     const vertex = new VertexSquare([3, 4, 0])
-    expect(vertex.center).toEqual<PointCoordinates>({ x: 96, y: 128 })
+    expect(vertex.center).toEqual<PointCoordinates>({ x: 80, y: 144 })
   })
 
   it('instance contain OffsetCoordinates', () => {

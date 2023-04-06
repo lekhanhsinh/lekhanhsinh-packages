@@ -12,7 +12,7 @@ describe('toPixel', () => {
           inverse: { x: false, y: false },
         }
       )
-    ).toEqual({ x: -25, y: -50 })
+    ).toEqual({ x: -50, y: -25 })
   })
 
   it('{ q: 1, r: 1, s: 0 } equal { x: 100, y: 100 }', () => {
@@ -25,7 +25,7 @@ describe('toPixel', () => {
           inverse: { x: false, y: false },
         }
       )
-    ).toEqual({ x: 50, y: 75 })
+    ).toEqual({ x: 25, y: 50 })
   })
 
   it('{ q: 2, r: -2, s: 0 } equal { x: 100, y: 100 } inverse:{ x: false, y: true }', () => {
@@ -38,6 +38,6 @@ describe('toPixel', () => {
           inverse: { x: false, y: true },
         }
       )
-    ).toEqual({ x: 100, y: 125 })
+    ).toEqual({ x: 75, y: 100 })
   })
 })

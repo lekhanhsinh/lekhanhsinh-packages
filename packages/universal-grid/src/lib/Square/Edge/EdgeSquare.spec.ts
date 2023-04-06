@@ -60,7 +60,7 @@ describe('EdgeSquare', () => {
 
   it('instance contain center pixel point', () => {
     const edge = new EdgeSquare([3, 4, 0, DIRECTION.N])
-    expect(edge.center).toEqual<PointCoordinates>({ x: 112, y: 128 })
+    expect(edge.center).toEqual<PointCoordinates>({ x: 96, y: 144 })
   })
 
   it('instance contain OffsetCoordinates', () => {

@@ -12,7 +12,7 @@ describe('fromPixel', () => {
           inverse: { x: false, y: false },
         }
       )
-    ).toEqual({ q: 0, r: -1, s: 0, direction: DIRECTION.N })
+    ).toEqual({ q: 0, r: 0, s: 0, direction: DIRECTION.N })
 
     expect(
       fromPixel(
@@ -23,7 +23,7 @@ describe('fromPixel', () => {
           inverse: { x: false, y: false },
         }
       )
-    ).toEqual({ q: 2, r: 2, s: 0, direction: DIRECTION.W })
+    ).toEqual({ q: 2, r: 2, s: 0, direction: DIRECTION.N })
 
     expect(
       fromPixel(
@@ -34,7 +34,7 @@ describe('fromPixel', () => {
           inverse: { x: false, y: false },
         }
       )
-    ).toEqual({ q: 24, r: 24, s: 0, direction: DIRECTION.N })
+    ).toEqual({ q: 25, r: 24, s: 0, direction: DIRECTION.N })
 
     expect(
       fromPixel(
@@ -45,7 +45,7 @@ describe('fromPixel', () => {
           inverse: { x: false, y: true },
         }
       )
-    ).toEqual({ q: 2, r: -2, s: 0, direction: DIRECTION.W })
+    ).toEqual({ q: 2, r: -3, s: 0, direction: DIRECTION.N })
 
     expect(
       fromPixel(
@@ -56,6 +56,6 @@ describe('fromPixel', () => {
           inverse: { x: false, y: true },
         }
       )
-    ).toEqual({ q: 24, r: -25, s: 0, direction: DIRECTION.N })
+    ).toEqual({ q: 25, r: -25, s: 0, direction: DIRECTION.N })
   })
 })

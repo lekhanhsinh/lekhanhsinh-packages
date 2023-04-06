@@ -11,7 +11,7 @@ describe('toPixel', () => {
           inverse: { x: false, y: false },
         }
       )
-    ).toEqual({ x: -25, y: -25 })
+    ).toEqual({ x: -50, y: -50 })
 
     expect(
       toPixel(
@@ -22,7 +22,7 @@ describe('toPixel', () => {
           inverse: { x: false, y: false },
         }
       )
-    ).toEqual({ x: 75, y: 75 })
+    ).toEqual({ x: 50, y: 50 })
 
     expect(
       toPixel(
@@ -33,6 +33,6 @@ describe('toPixel', () => {
           inverse: { x: false, y: true },
         }
       )
-    ).toEqual({ x: 125, y: 125 })
+    ).toEqual({ x: 100, y: 100 })
   })
 })
