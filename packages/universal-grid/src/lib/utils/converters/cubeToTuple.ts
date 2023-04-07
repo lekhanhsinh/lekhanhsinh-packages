@@ -1,9 +1,9 @@
 import { type CubeCoordinates, type TupleCoordinates } from '../../types'
 
 export const cubeToTuple = ({
-  q = 0,
-  r = 0,
-  s = 0,
+  q,
+  r,
+  s,
   direction,
-}: Partial<CubeCoordinates>): TupleCoordinates =>
+}: CubeCoordinates): TupleCoordinates =>
   direction != null ? [q, r, s, direction] : [q, r, s]

@@ -6,6 +6,5 @@ describe('cubeToTuple', () => {
     expect(cubeToTuple({ q: 0, r: 0, s: 0, direction: 0 })).toEqual([
       0, 0, 0, 0,
     ])
-    expect(cubeToTuple({})).toEqual([0, 0, 0])
   })
 })

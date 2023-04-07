@@ -17,7 +17,8 @@ export const toCube = (
   } else if (isOffset(coordinates)) {
     return { q: coordinates.col, r: coordinates.row, s: 0 }
   } else if (isTuple(coordinates)) {
-    return tupleToCube(coordinates)
+    const { q, r, s } = tupleToCube(coordinates)
+    return { q: q ?? 0, r: r ?? 0, s: s ?? 0 }
   } else {
     return fromPixel(coordinates as PointCoordinates, settings)
   }

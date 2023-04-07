@@ -22,8 +22,11 @@ export const toCube = (
       direction: coordinates.direction ?? DIRECTION.N,
     }
   } else if (isTuple(coordinates)) {
+    const { q, r, s } = tupleToCube(coordinates)
     return {
-      ...tupleToCube(coordinates),
+      q: q ?? 0,
+      r: r ?? 0,
+      s: s ?? 0,
       direction: coordinates[3] ?? DIRECTION.N,
     }
   } else if (isPoint(coordinates)) {
