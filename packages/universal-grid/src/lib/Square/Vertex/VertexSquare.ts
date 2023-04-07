@@ -16,7 +16,12 @@ export class VertexSquare
     Readonly<Omit<CubeCoordinates, 'direction'>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel = fromPixel
+  static fromPixel(
+    coordinates: Omit<PointCoordinates, 'direction'>
+  ): Omit<CubeCoordinates, 'direction'> {
+    return fromPixel(coordinates, this.settings)
+  }
+
   static readonly type = PART_TYPE.VERTEX
   static readonly shape = SHAPE.SQUARE
   readonly type = PART_TYPE.VERTEX
@@ -103,7 +108,7 @@ export class VertexSquare
     }
   }
 
-  protrudes = (): Map<DIRECTION, Required<CubeCoordinates>> => {
+  protrudes(): Map<DIRECTION, Required<CubeCoordinates>> {
     const results = new Map<DIRECTION, Required<CubeCoordinates>>()
     protrudeSteps.forEach((value, key) => {
       if (value == null) return

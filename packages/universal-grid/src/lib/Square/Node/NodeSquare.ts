@@ -17,7 +17,11 @@ export class NodeSquare
     Readonly<Omit<CubeCoordinates, 'direction'>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel = fromPixel
+  static fromPixel(
+    coordinates: Omit<PointCoordinates, 'direction'>
+  ): Omit<CubeCoordinates, 'direction'> {
+    return fromPixel(coordinates, this.settings)
+  }
 
   static lineWalk = lineWalk
   static rectangleFilled = rectangleFilled
@@ -115,7 +119,7 @@ export class NodeSquare
     }
   }
 
-  borders = (): Map<DIRECTION, Required<CubeCoordinates>> => {
+  borders(): Map<DIRECTION, Required<CubeCoordinates>> {
     const results = new Map<DIRECTION, Required<CubeCoordinates>>()
     borderSteps.forEach((value, key) => {
       if (value == null) return
@@ -135,7 +139,7 @@ export class NodeSquare
     return { q: this.q + corner.q, r: this.r + corner.r, s: this.s + corner.s }
   }
 
-  corners = (): Map<DIRECTION, Omit<CubeCoordinates, 'direction'>> => {
+  corners(): Map<DIRECTION, Omit<CubeCoordinates, 'direction'>> {
     const results = new Map<DIRECTION, Omit<CubeCoordinates, 'direction'>>()
     cornerSteps.forEach((value, key) => {
       if (value == null) return

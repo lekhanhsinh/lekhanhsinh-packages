@@ -16,7 +16,9 @@ export class EdgeSquare
     Readonly<Required<CubeCoordinates>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel = fromPixel
+  static fromPixel(coordinates: PointCoordinates): Required<CubeCoordinates> {
+    return fromPixel(coordinates, this.settings)
+  }
 
   static readonly type = PART_TYPE.EDGE
   static readonly shape = SHAPE.SQUARE
@@ -120,7 +122,7 @@ export class EdgeSquare
     return { q: this.q + join.q, r: this.r + join.r, s: this.s + join.s }
   }
 
-  joins = (): Map<DIRECTION, Omit<CubeCoordinates, 'direction'>> => {
+  joins(): Map<DIRECTION, Omit<CubeCoordinates, 'direction'>> {
     const joinSteps = this.direction === DIRECTION.W ? joinWSteps : joinNSteps
     const results = new Map<DIRECTION, Omit<CubeCoordinates, 'direction'>>()
     joinSteps.forEach((value, key) => {
@@ -148,7 +150,7 @@ export class EdgeSquare
     }
   }
 
-  endpoints = (): Map<DIRECTION, Omit<CubeCoordinates, 'direction'>> => {
+  endpoints(): Map<DIRECTION, Omit<CubeCoordinates, 'direction'>> {
     const endpointSteps =
       this.direction === DIRECTION.W ? endpointWSteps : endpointNSteps
     const results = new Map<DIRECTION, Omit<CubeCoordinates, 'direction'>>()
