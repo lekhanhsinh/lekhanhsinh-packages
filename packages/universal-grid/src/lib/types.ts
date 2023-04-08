@@ -1,7 +1,7 @@
-// import {
-//   type PartHexagonCoordinates,
-//   type HexagonPartClass,
-// } from './Hexagon/types'
+import {
+  type PartHexagonCoordinates,
+  type HexagonPartClass,
+} from './Hexagon/types'
 import {
   type SquarePartClass,
   type PartSquareCoordinates,
@@ -33,18 +33,12 @@ export type TupleCoordinates = [
   direction?: number
 ]
 
-// export type PartClass = SquarePartClass | HexagonPartClass
-
-// export type PartCoordinates<T extends PartClass> = T extends SquarePartClass
-//   ? PartSquareCoordinates<T>
-//   : T extends HexagonPartClass
-//   ? PartHexagonCoordinates<T>
-//   : never
-
-export type PartClass = SquarePartClass
+export type PartClass = SquarePartClass | HexagonPartClass
 
 export type PartCoordinates<T extends PartClass> = T extends SquarePartClass
   ? PartSquareCoordinates<T>
+  : T extends HexagonPartClass
+  ? PartHexagonCoordinates<T>
   : never
 
 export interface Ellipse {
