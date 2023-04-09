@@ -6,10 +6,10 @@ export const fromPixel = (
   { x = 0, y = 0, direction }: Partial<PointCoordinates>,
   { size: { width, height }, origin, inverse }: SquareSettings
 ): Required<CubeCoordinates> => {
-  const _x = inverse.x ? -x : x
-  const _y = inverse.y ? -y : y
-  const sq = (_x - origin.x) / width
-  const sr = (_y - origin.y) / height
+  const _x = (inverse.x ? -x : x) - origin.x
+  const _y = (inverse.y ? -y : y) - origin.y
+  const sq = _x / width
+  const sr = _y / height
   let q = Math.round(sq)
   let r = Math.round(sr)
 

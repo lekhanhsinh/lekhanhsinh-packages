@@ -50,7 +50,6 @@ export const lineWalkVector = (
   const results: Array<Omit<CubeCoordinates, 'direction'>> = []
   const { includeStart = true } = options ?? {}
   const vector = radiansToVector(direction)
-
   let q = start.q
   let r = start.r
   const stepq = vector.x > 0 ? 1 : -1
@@ -87,18 +86,18 @@ export const lineWalkBetweenPoint = (
 ): Array<Omit<CubeCoordinates, 'direction'>> => {
   const { includeStart = true } = options ?? {}
   const _start = {
-    x: inverse.x ? -start.x : start.x,
-    y: inverse.y ? -start.y : start.y,
+    x: (inverse.x ? -start.x : start.x) - origin.x,
+    y: (inverse.y ? -start.y : start.y) - origin.y,
   }
   const _stop = {
-    x: inverse.x ? -stop.x : stop.x,
-    y: inverse.y ? -stop.y : stop.y,
+    x: (inverse.x ? -stop.x : stop.x) - origin.x,
+    y: (inverse.y ? -stop.y : stop.y) - origin.y,
   }
   const results: Array<Omit<CubeCoordinates, 'direction'>> = []
-  const x1 = (_start.x - origin.x) / width
-  const y1 = (_start.y - origin.y) / height
-  const x2 = (_stop.x - origin.x) / width
-  const y2 = (_stop.y - origin.y) / height
+  const x1 = _start.x / width
+  const y1 = _start.y / height
+  const x2 = _stop.x / width
+  const y2 = _stop.y / height
   const dq = x2 - x1
   const dr = y2 - y1
   let q = Math.floor(x1)

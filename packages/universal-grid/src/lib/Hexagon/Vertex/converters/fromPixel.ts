@@ -15,21 +15,22 @@ export const fromPixel = (
     inverse,
     isPointy,
   } = settings
-  const _x = inverse.x ? -x : x
-  const _y = inverse.y ? y : -y
+  const _x = (inverse.x ? -x : x) - origin.x
+  const _y = (inverse.y ? y : -y) + origin.y
   let sq = 0
   let sr = 0
   let ss = 0
   if (isPointy) {
-    sq = (SQRT3_3 * (_x - origin.x) - (1 / 3) * (_y - origin.y)) / (width / 2)
-    ss = ((2 / 3) * (_y - origin.y)) / (height / 2)
+    sq = (SQRT3_3 * _x - (1 / 3) * _y) / (width / 2)
+    ss = ((2 / 3) * _y) / (height / 2)
     sr = -sq - ss
   } else {
-    sq = ((2 / 3) * (_x - origin.x)) / (width / 2)
-    ss = (SQRT3_3 * (_y - origin.y) - (1 / 3) * (_x - origin.x)) / (width / 2)
+    sq = ((2 / 3) * _x) / (width / 2)
+    ss = (SQRT3_3 * _y - (1 / 3) * _x) / (height / 2)
     sr = -sq - ss
   }
   const { q, r, s } = roundCubeHexagon({ q: sq, r: sr, s: ss })
+
   if (direction != null) {
     return { q, r, s: 0, direction }
   }
@@ -43,8 +44,8 @@ export const fromPixel = (
   for (const c of corners) {
     const p = toPixel(c, settings)
     if (
-      Math.pow(p.x - _x, 2) + Math.pow(p.y - _y, 2) <
-      Math.pow(pixel.x - _x, 2) + Math.pow(pixel.y - _y, 2)
+      Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2) <
+      Math.pow(pixel.x - x, 2) + Math.pow(pixel.y - y, 2)
     ) {
       corner = c
       pixel = p

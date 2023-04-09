@@ -5,7 +5,10 @@ export const toPixel = (
   { q = 0, r = 0 }: Omit<Partial<CubeCoordinates>, 'direction'>,
   { size: { width, height }, origin, inverse }: SquareSettings
 ): Omit<PointCoordinates, 'direction'> => {
-  const x = q * width + origin.x
-  const y = r * height + origin.y
-  return { x: inverse.x ? -x : x, y: inverse.y ? -y : y }
+  const x = q * width
+  const y = r * height
+  return {
+    x: (inverse.x ? -x : x) + origin.x,
+    y: (inverse.y ? -y : y) + origin.y,
+  }
 }

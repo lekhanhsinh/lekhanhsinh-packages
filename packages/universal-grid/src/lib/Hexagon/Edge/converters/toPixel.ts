@@ -14,13 +14,15 @@ export const toPixel = (
   let x = 0
   let y = 0
   if (isPointy) {
-    x = (q * SQRT3 + SQRT3_2 * s + Math.cos(direction)) * (width / 2) + origin.x
-    y = (s * (3 / 2) - Math.sin(direction)) * (height / 2) + origin.y
+    x = (q * SQRT3 + SQRT3_2 * s + Math.cos(direction)) * (width / 2)
+    y = (s * (3 / 2) - Math.sin(direction)) * (height / 2)
   } else {
-    x = (q * (3 / 2) + Math.cos(direction)) * (width / 2) + origin.x
-    y =
-      (q * SQRT3_2 + SQRT3 * s - Math.sin(direction)) * (height / 2) + origin.y
+    x = (q * (3 / 2) + Math.cos(direction)) * (width / 2)
+    y = (q * SQRT3_2 + SQRT3 * s - Math.sin(direction)) * (height / 2)
   }
 
-  return { x: inverse.x ? -x : x, y: inverse.y ? y : -y }
+  return {
+    x: (inverse.x ? -x : x) + origin.x,
+    y: (inverse.y ? y : -y) - origin.y,
+  }
 }

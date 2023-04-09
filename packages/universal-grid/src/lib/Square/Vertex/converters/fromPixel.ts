@@ -5,10 +5,10 @@ export const fromPixel = (
   { x = 0, y = 0 }: Omit<Partial<PointCoordinates>, 'direction'>,
   { size: { width, height }, origin, inverse }: SquareSettings
 ): Omit<CubeCoordinates, 'direction'> => {
-  const _x = inverse.x ? -x : x
-  const _y = inverse.y ? -y : y
-  let q = Math.round((_x - origin.x) / width + 0.5)
-  let r = Math.round((_y - origin.y) / height - 0.5)
+  const _x = (inverse.x ? -x : x) - origin.x
+  const _y = (inverse.y ? -y : y) - origin.y
+  let q = Math.round(_x / width + 0.5)
+  let r = Math.round(_y / height - 0.5)
 
   // to avoid -0
   q += 0
