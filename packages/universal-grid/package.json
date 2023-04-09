@@ -15,6 +15,9 @@
   "keywords": [
     "grid",
     "square",
+    "square-grid",
+    "hexagon",
+    "hexagon-grid",
     "tile",
     "node"
   ]
