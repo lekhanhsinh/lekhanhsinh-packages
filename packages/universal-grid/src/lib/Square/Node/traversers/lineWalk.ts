@@ -4,10 +4,9 @@ import {
   type PartCoordinates,
   type CubeCoordinates,
 } from '../../../types'
-import { isPoint } from '../../../utils'
+import { isPoint, radiansToVector } from '../../../utils'
 import { type NodeSquare } from '..'
 import { type SquareSettings } from '../../types'
-import { radiansToVector } from '../../../utils/maths/radiansToVector'
 
 // prettier-ignore
 export function lineWalk(options: {start?: PartCoordinates<NodeSquare>, stop: PartCoordinates<NodeSquare>}): Traverser<NodeSquare>
@@ -83,15 +82,23 @@ export const lineWalkVector = (
 export const lineWalkBetweenPoint = (
   start: Omit<PointCoordinates, 'direction'>,
   stop: Omit<PointCoordinates, 'direction'>,
-  { size: { width, height }, origin }: SquareSettings,
+  { size: { width, height }, origin, inverse }: SquareSettings,
   options?: { includeStart: boolean }
 ): Array<Omit<CubeCoordinates, 'direction'>> => {
   const { includeStart = true } = options ?? {}
+  const _start = {
+    x: inverse.x ? -start.x : start.x,
+    y: inverse.y ? -start.y : start.y,
+  }
+  const _stop = {
+    x: inverse.x ? -stop.x : stop.x,
+    y: inverse.y ? -stop.y : stop.y,
+  }
   const results: Array<Omit<CubeCoordinates, 'direction'>> = []
-  const x1 = (start.x - origin.x) / width
-  const y1 = (start.y - origin.y) / height
-  const x2 = (stop.x - origin.x) / width
-  const y2 = (stop.y - origin.y) / height
+  const x1 = (_start.x - origin.x) / width
+  const y1 = (_start.y - origin.y) / height
+  const x2 = (_stop.x - origin.x) / width
+  const y2 = (_stop.y - origin.y) / height
   const dq = x2 - x1
   const dr = y2 - y1
   let q = Math.floor(x1)

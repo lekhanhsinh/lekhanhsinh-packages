@@ -8,6 +8,7 @@ import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
 import { cubeToOffset, fromPixel, toCube, toPixel } from './converters'
 import { type HexagonSettings } from '../types'
 import { defaultHexagonSettings } from '..'
+import { lineWalk } from './traversers'
 
 export class NodeHexagon
   implements
@@ -20,6 +21,8 @@ export class NodeHexagon
   ): Omit<CubeCoordinates, 'direction'> {
     return fromPixel(coordinates, this.settings)
   }
+
+  static lineWalk = lineWalk
 
   static readonly type = PART_TYPE.NODE
   static readonly shape = SHAPE.HEXAGON

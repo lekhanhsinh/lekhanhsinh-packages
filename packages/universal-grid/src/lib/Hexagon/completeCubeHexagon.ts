@@ -1,5 +1,5 @@
 import { type CubeCoordinates } from '../types'
-import { isFiniteNumber } from '../utils/checkers/isFiniteNumber'
+import { isFiniteNumber } from '../utils'
 
 export function completeCubeHexagon({
   q,

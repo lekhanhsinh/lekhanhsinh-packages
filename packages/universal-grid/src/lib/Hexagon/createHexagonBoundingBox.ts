@@ -1,6 +1,6 @@
 import { SQRT3 } from '../constants'
 import { type Ellipse, type BoundingBox } from '../types'
-import { isFiniteNumber } from '../utils/checkers/isFiniteNumber'
+import { isFiniteNumber } from '../utils'
 
 export const createHexagonBoundingBox = (
   input: number | BoundingBox | Ellipse,

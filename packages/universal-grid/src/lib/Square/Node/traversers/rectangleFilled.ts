@@ -6,8 +6,7 @@ import {
   type Ellipse,
   type CubeCoordinates,
 } from '../../../types'
-import { isFiniteNumber } from '../../../utils/checkers/isFiniteNumber'
-import { radiansToVector } from '../../../utils/maths/radiansToVector'
+import { radiansToVector, isFiniteNumber } from '../../../utils'
 import { type NodeSquare } from '../NodeSquare'
 import { lineWalk, lineWalkVector } from './lineWalk'
 

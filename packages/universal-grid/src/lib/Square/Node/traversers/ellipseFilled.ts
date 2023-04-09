@@ -4,7 +4,7 @@ import {
   type CubeCoordinates,
   type Ellipse,
 } from '../../../types'
-import { isFiniteNumber } from '../../../utils/checkers/isFiniteNumber'
+import { isFiniteNumber } from '../../../utils'
 import { type NodeSquare } from '../NodeSquare'
 
 export function ellipseFilled(options: {

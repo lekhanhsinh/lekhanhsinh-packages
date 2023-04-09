@@ -1,5 +1,5 @@
 import { type BoundingBox, type Ellipse } from '../types'
-import { isFiniteNumber } from '../utils/checkers/isFiniteNumber'
+import { isFiniteNumber } from '../utils'
 
 export const createSquareBoundingBox = (
   input: number | BoundingBox | Ellipse
