@@ -8,7 +8,12 @@ import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
 import { cubeToOffset, fromPixel, toCube, toPixel } from './converters'
 import { type HexagonSettings } from '../types'
 import { defaultHexagonSettings } from '..'
-import { lineWalk } from './traversers'
+import {
+  circleFilled,
+  circleOutline,
+  lineWalk,
+  rectangleFilled,
+} from './traversers'
 
 export class NodeHexagon
   implements
@@ -23,6 +28,9 @@ export class NodeHexagon
   }
 
   static lineWalk = lineWalk
+  static rectangleFilled = rectangleFilled
+  static circleOutline = circleOutline
+  static circleFilled = circleFilled
 
   static readonly type = PART_TYPE.NODE
   static readonly shape = SHAPE.HEXAGON
