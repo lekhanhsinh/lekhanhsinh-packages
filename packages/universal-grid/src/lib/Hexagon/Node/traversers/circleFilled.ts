@@ -1,4 +1,5 @@
-import { repeatWith, type Traverser } from '../../../Grid'
+import { type Traverser } from '../../../Grid'
+import { repeatWith } from '../../../Grid/traversers'
 import { type CubeCoordinates, type PartCoordinates } from '../../../types'
 import { type NodeHexagon } from '../NodeHexagon'
 import { circleOutline } from './circleOutline'

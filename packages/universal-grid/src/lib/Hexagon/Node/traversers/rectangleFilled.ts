@@ -1,5 +1,6 @@
 import { type HexagonSettings } from '../..'
-import { type Traverser, repeatWith } from '../../../Grid'
+import { type Traverser } from '../../../Grid'
+import { repeatWith } from '../../../Grid/traversers'
 import {
   type CubeCoordinates,
   type BoundingBox,
