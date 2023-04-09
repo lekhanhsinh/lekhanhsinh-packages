@@ -15,7 +15,7 @@ export function rectangleFilled(options: { center?: PartCoordinates<NodeSquare>,
 // prettier-ignore
 export function rectangleFilled(options: { start?: PartCoordinates<NodeSquare>, direction: number, size: BoundingBox }): Traverser<NodeSquare>
 // prettier-ignore
-export function rectangleFilled(options: { center?: PartCoordinates<NodeSquare>, radius: number | Ellipse, spiral: boolean, startDirection?: number }): Traverser<NodeSquare>
+export function rectangleFilled(options: { center?: PartCoordinates<NodeSquare>, radius: number | Ellipse, spiral: boolean, startDirection?: number, clockwise?: boolean }): Traverser<NodeSquare>
 export function rectangleFilled(options: {
   start?: PartCoordinates<NodeSquare>
   center?: PartCoordinates<NodeSquare>
@@ -24,6 +24,7 @@ export function rectangleFilled(options: {
   radius?: number | Ellipse
   spiral?: boolean
   startDirection?: number
+  clockwise?: boolean
 }): Traverser<NodeSquare> {
   const {
     start,
@@ -32,7 +33,8 @@ export function rectangleFilled(options: {
     direction,
     radius,
     spiral = false,
-    startDirection,
+    startDirection = 0,
+    clockwise = true,
   } = options
 
   return (create, cursor, grid): NodeSquare[] => {
@@ -60,9 +62,15 @@ export function rectangleFilled(options: {
         _radius = { xRadius: radius, yRadius: radius }
       }
       if (spiral) {
-        results = rectangleFilledSpiral(first, _radius, startDirection, {
-          includeStart,
-        })
+        results = rectangleFilledSpiral(
+          first,
+          _radius,
+          startDirection,
+          clockwise,
+          {
+            includeStart,
+          }
+        )
       } else {
         results = rectangleFilledNormal(first, _radius, {
           includeStart,
@@ -97,6 +105,7 @@ export const rectangleFilledSpiral = (
   center: Omit<CubeCoordinates, 'direction'>,
   { xRadius, yRadius }: Ellipse,
   startDirection = 0,
+  clockwise = true,
   options?: { includeStart: boolean }
 ): Array<Omit<CubeCoordinates, 'direction'>> => {
   const { includeStart = true } = options ?? {}
@@ -123,7 +132,7 @@ export const rectangleFilledSpiral = (
         }
       )
       results.push(...line)
-      direction += Math.PI / 2
+      direction += clockwise ? Math.PI / 2 : -Math.PI / 2
     }
     round += 1
   }
