@@ -14,6 +14,7 @@ import {
   lineWalk,
   rectangleFilled,
 } from './traversers'
+import { isHexagon } from '../isHexagon'
 
 export class NodeHexagon
   implements
@@ -84,6 +85,12 @@ export class NodeHexagon
   constructor(coordinates: PartCoordinates<NodeHexagon> = [0, 0, 0]) {
     const { q, r, s } = toCube(coordinates, this)
     this.#values = [q, r, s]
+    if (!isHexagon({ q, r, s })) {
+      throw new Error(
+        `Invalid Hexagon cube coordinates.
+          Received: ${JSON.stringify({ q, r, s })}`
+      )
+    }
   }
 
   toString(): string {

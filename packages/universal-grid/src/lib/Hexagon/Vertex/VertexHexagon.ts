@@ -6,6 +6,7 @@ import {
   type PartCoordinates,
   type OffsetCoordinates,
 } from '../../types'
+import { isHexagon } from '../isHexagon'
 import { type HexagonSettings } from '../types'
 import { toCube, toPixel } from './converters'
 
@@ -77,6 +78,26 @@ export class VertexHexagon
   constructor(coordinates: PartCoordinates<VertexHexagon> = [0, 0, 0]) {
     const { q, r, s, direction } = toCube(coordinates, this)
     this.#values = [q, r, s, direction]
+    if (!isHexagon({ q, r, s })) {
+      throw new Error(
+        `Invalid Hexagon cube coordinates.
+          Received: ${JSON.stringify({ q, r, s })}`
+      )
+    }
+    if (this.isPointy && ![DIRECTION.N, DIRECTION.S].includes(this.direction)) {
+      throw new Error(
+        `Invalid pointy EdgeHexagon direction (DIRECTION.N | DIRECTION.S).
+          Received: ${this.direction}`
+      )
+    } else if (
+      !this.isPointy &&
+      ![DIRECTION.W, DIRECTION.E].includes(this.direction)
+    ) {
+      throw new Error(
+        `Invalid flat EdgeHexagon direction (DIRECTION.W | DIRECTION.E).
+          Received: ${this.direction}`
+      )
+    }
   }
 
   toString(): string {
