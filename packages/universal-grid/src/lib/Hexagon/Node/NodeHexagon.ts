@@ -5,7 +5,7 @@ import {
   type PartCoordinates,
 } from '../../types'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
-import { cubeToOffset, fromPixel, toCube, toPixel } from './converters'
+import { cubeToOffset, toCube, toPixel } from './converters'
 import { type HexagonSettings } from '../types'
 import { defaultHexagonSettings } from '..'
 import {
@@ -21,12 +21,6 @@ export class NodeHexagon
     Readonly<Omit<CubeCoordinates, 'direction'>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel(
-    coordinates: Omit<PointCoordinates, 'direction'>
-  ): Omit<CubeCoordinates, 'direction'> {
-    return fromPixel(coordinates, this.settings)
-  }
-
   static lineWalk = lineWalk
   static rectangleFilled = rectangleFilled
   static circleOutline = circleOutline

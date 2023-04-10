@@ -7,7 +7,7 @@ import {
   type OffsetCoordinates,
 } from '../../types'
 import { type HexagonSettings } from '../types'
-import { fromPixel, toCube, toPixel } from './converters'
+import { toCube, toPixel } from './converters'
 
 export class VertexHexagon
   implements
@@ -15,10 +15,6 @@ export class VertexHexagon
     Readonly<Required<CubeCoordinates>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel(coordinates: PointCoordinates): Required<CubeCoordinates> {
-    return fromPixel(coordinates, this.settings)
-  }
-
   static readonly type = PART_TYPE.VERTEX
   static readonly shape = SHAPE.HEXAGON
   readonly type = PART_TYPE.VERTEX

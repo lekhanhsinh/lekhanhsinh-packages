@@ -8,7 +8,7 @@ import {
 } from '../../types'
 import { cubeToString } from '../../utils'
 import { type SquareSettings } from '../types'
-import { fromPixel, toCube, toPixel } from './converters'
+import { toCube, toPixel } from './converters'
 
 export class EdgeSquare
   implements
@@ -16,10 +16,6 @@ export class EdgeSquare
     Readonly<Required<CubeCoordinates>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel(coordinates: PointCoordinates): Required<CubeCoordinates> {
-    return fromPixel(coordinates, this.settings)
-  }
-
   static readonly type = PART_TYPE.EDGE
   static readonly shape = SHAPE.SQUARE
   readonly type = PART_TYPE.EDGE

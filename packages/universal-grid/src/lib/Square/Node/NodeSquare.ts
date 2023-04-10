@@ -6,7 +6,7 @@ import {
   type PartCoordinates,
 } from '../../types'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
-import { fromPixel, toCube, toPixel } from './converters'
+import { toCube, toPixel } from './converters'
 import { ellipseFilled, lineWalk, rectangleFilled } from './traversers'
 import { defaultSquareSettings } from '..'
 import { cubeToString } from '../../utils'
@@ -17,12 +17,6 @@ export class NodeSquare
     Readonly<Omit<CubeCoordinates, 'direction'>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel(
-    coordinates: Omit<PointCoordinates, 'direction'>
-  ): Omit<CubeCoordinates, 'direction'> {
-    return fromPixel(coordinates, this.settings)
-  }
-
   static lineWalk = lineWalk
   static rectangleFilled = rectangleFilled
   static ellipseFilled = ellipseFilled

@@ -8,7 +8,7 @@ import {
 } from '../../types'
 import { cubeToString } from '../../utils'
 import { type SquareSettings } from '../types'
-import { fromPixel, toCube, toPixel } from './converters'
+import { toCube, toPixel } from './converters'
 
 export class VertexSquare
   implements
@@ -16,12 +16,6 @@ export class VertexSquare
     Readonly<Omit<CubeCoordinates, 'direction'>>,
     Readonly<OffsetCoordinates>
 {
-  static fromPixel(
-    coordinates: Omit<PointCoordinates, 'direction'>
-  ): Omit<CubeCoordinates, 'direction'> {
-    return fromPixel(coordinates, this.settings)
-  }
-
   static readonly type = PART_TYPE.VERTEX
   static readonly shape = SHAPE.SQUARE
   readonly type = PART_TYPE.VERTEX
