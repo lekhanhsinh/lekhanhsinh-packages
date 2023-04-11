@@ -6,6 +6,7 @@ export * from './Vertex'
 export * from './createHexagonBoundingBox'
 export * from './completeCubeHexagon'
 export * from './roundCubeHexagon'
+export * from './isHexagon'
 export * from './types'
 
 export const defaultHexagonSettings: Required<HexagonSettings> = {

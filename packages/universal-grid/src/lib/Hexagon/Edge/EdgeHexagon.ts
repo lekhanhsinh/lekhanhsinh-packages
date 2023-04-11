@@ -57,7 +57,7 @@ export class EdgeHexagon
     return toPixel(this, this)
   }
 
-  readonly #values: number[] = [0, 0, 0, DIRECTION.N]
+  readonly #values: number[] = [0, 0, 0]
 
   get q(): number {
     return this.#values[0]
@@ -75,9 +75,7 @@ export class EdgeHexagon
     return this.#values[3]
   }
 
-  constructor(
-    coordinates: PartCoordinates<EdgeHexagon> = [0, 0, 0, DIRECTION.N]
-  ) {
+  constructor(coordinates: PartCoordinates<EdgeHexagon> = [0, 0, 0]) {
     const { q, r, s, direction } = toCube(coordinates, this)
     this.#values = [q, r, s, direction]
     if (!isHexagon({ q, r, s })) {

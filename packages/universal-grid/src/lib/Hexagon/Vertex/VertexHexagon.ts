@@ -86,7 +86,7 @@ export class VertexHexagon
     }
     if (this.isPointy && ![DIRECTION.N, DIRECTION.S].includes(this.direction)) {
       throw new Error(
-        `Invalid pointy EdgeHexagon direction (DIRECTION.N | DIRECTION.S).
+        `Invalid pointy VertexHexagon direction (DIRECTION.N | DIRECTION.S).
           Received: ${this.direction}`
       )
     } else if (
@@ -94,7 +94,7 @@ export class VertexHexagon
       ![DIRECTION.W, DIRECTION.E].includes(this.direction)
     ) {
       throw new Error(
-        `Invalid flat EdgeHexagon direction (DIRECTION.W | DIRECTION.E).
+        `Invalid flat VertexHexagon direction (DIRECTION.W | DIRECTION.E).
           Received: ${this.direction}`
       )
     }

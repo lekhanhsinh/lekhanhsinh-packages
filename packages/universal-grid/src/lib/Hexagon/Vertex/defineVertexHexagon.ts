@@ -6,15 +6,18 @@ import { VertexHexagon } from './VertexHexagon'
 export const defineVertexHexagon = (
   options?: HexagonOptions
 ): typeof VertexHexagon => {
-  let { size, origin, inverse, isPointy, offset } = {
-    ...defaultHexagonSettings,
-    ...options,
+  const settings = { ...defaultHexagonSettings }
+  if (options != null) {
+    let key: keyof HexagonSettings
+    for (key in settings) {
+      if (options[key] != null) {
+        settings[key] = options[key] as never
+      }
+    }
   }
 
-  size = createHexagonBoundingBox(size, isPointy)
-  origin = createOrigin(origin, size)
-
-  const settings = { inverse, size, origin, isPointy, offset }
+  settings.size = createHexagonBoundingBox(settings.size, settings.isPointy)
+  settings.origin = createOrigin(settings.origin, settings.size)
 
   return class extends VertexHexagon {
     static override get settings(): HexagonSettings {
