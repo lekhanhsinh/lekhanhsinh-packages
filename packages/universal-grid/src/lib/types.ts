@@ -61,5 +61,11 @@ export interface PartSettings {
 
 export interface AddtionOptions {
   size?: number | Ellipse | BoundingBox
-  origin?: string | Omit<PointCoordinates, 'direction'> | Ellipse
+  origin?:
+    | 'top-left'
+    | 'bottom-left'
+    | 'top-right'
+    | 'bottom-right'
+    | Omit<PointCoordinates, 'direction'>
+    | Ellipse
 }

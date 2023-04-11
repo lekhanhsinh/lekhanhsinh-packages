@@ -1,8 +1,13 @@
-import { type PointCoordinates, type Ellipse, type BoundingBox } from '../types'
+import {
+  type PointCoordinates,
+  type Ellipse,
+  type BoundingBox,
+  type AddtionOptions,
+} from '../types'
 import { isPoint } from '.'
 
 export const createOrigin = (
-  input: string | PointCoordinates | Ellipse,
+  input: Required<AddtionOptions['origin']>,
   { width, height }: BoundingBox
 ): Omit<PointCoordinates, 'direction'> => {
   if (isPoint(input)) return input
@@ -23,7 +28,10 @@ export const createOrigin = (
   }
 
   if (typeof input === 'object') {
-    return { x: input.xRadius * width, y: input.yRadius * height }
+    return {
+      x: (input as Ellipse).xRadius * width,
+      y: (input as Ellipse).yRadius * height,
+    }
   }
 
   throw new TypeError(
