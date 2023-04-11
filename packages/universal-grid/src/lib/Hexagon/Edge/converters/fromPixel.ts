@@ -15,8 +15,8 @@ export const fromPixel = (
     inverse,
     isPointy,
   } = settings
-  const _x = (inverse.x ? -x : x) - origin.x
-  const _y = (inverse.y ? y : -y) + origin.y
+  const _x = inverse.x ? -(x - origin.x) : x - origin.x
+  const _y = inverse.y ? y + origin.y : -(y + origin.y)
   let sq = 0
   let sr = 0
   let ss = 0

@@ -7,8 +7,8 @@ export const fromPixel = (
   { x = 0, y = 0 }: Omit<Partial<PointCoordinates>, 'direction'>,
   { size: { width, height }, origin, inverse, isPointy }: HexagonSettings
 ): CubeCoordinates => {
-  const _x = (inverse.x ? -x : x) - origin.x
-  const _y = (inverse.y ? y : -y) + origin.y
+  const _x = inverse.x ? -(x - origin.x) : x - origin.x
+  const _y = inverse.y ? y + origin.y : -(y + origin.y)
   let sq = 0
   let sr = 0
   let ss = 0

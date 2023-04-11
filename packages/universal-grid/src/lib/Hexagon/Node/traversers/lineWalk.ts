@@ -115,12 +115,12 @@ export const lineWalkBetweenPoint = (
 ): Array<Omit<CubeCoordinates, 'direction'>> => {
   const { includeStart = true } = options ?? {}
   const _start = {
-    x: (inverse.x ? -start.x : start.x) - origin.x,
-    y: (inverse.y ? start.y : -start.y) + origin.y,
+    x: inverse.x ? -(start.x - origin.x) : start.x - origin.x,
+    y: inverse.y ? start.y + origin.y : -(start.y + origin.y),
   }
   const _stop = {
-    x: (inverse.x ? -stop.x : stop.x) - origin.x,
-    y: (inverse.y ? stop.y : -stop.y) + origin.y,
+    x: inverse.x ? -(stop.x - origin.x) : stop.x - origin.x,
+    y: inverse.y ? stop.y + origin.y : -(stop.y + origin.y),
   }
   const results: Array<Omit<CubeCoordinates, 'direction'>> = []
 

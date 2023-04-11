@@ -5,8 +5,8 @@ export const fromPixel = (
   { x = 0, y = 0 }: Omit<Partial<PointCoordinates>, 'direction'>,
   { size: { width, height }, origin, inverse }: SquareSettings
 ): Omit<CubeCoordinates, 'direction'> => {
-  const _x = (inverse.x ? -x : x) - origin.x
-  const _y = (inverse.y ? -y : y) - origin.y
+  const _x = inverse.x ? -(x - origin.x) : x - origin.x
+  const _y = inverse.y ? -(y - origin.y) : y - origin.y
   let q = Math.round(_x / width)
   let r = Math.round(_y / height)
 

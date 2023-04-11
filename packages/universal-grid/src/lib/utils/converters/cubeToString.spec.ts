@@ -5,7 +5,7 @@ describe('cubeToString', () => {
     expect(cubeToString({ q: 0, r: 0, s: 0 })).toEqual('{"q":0,"r":0,"s":0}')
     expect(cubeToString({})).toEqual('{"q":0,"r":0,"s":0}')
     expect(cubeToString({ q: 0, r: 0, s: 0, direction: 0 })).toEqual(
-      '{"q":0,"r":0,"s":0,"direction":0}'
+      '{"q":0,"r":0,"s":0,"direction":"E"}'
     )
   })
 })
