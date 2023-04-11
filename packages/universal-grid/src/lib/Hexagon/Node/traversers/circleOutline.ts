@@ -80,7 +80,6 @@ export const circleOutlineNormal = (
 
   let direction =
     startDirection + (clockwise ? -Math.PI * (2 / 3) : Math.PI * (2 / 3))
-  console.log(startDirection * (180 / Math.PI), (direction * 180) / Math.PI)
   for (let i = 0; i < 6; i++) {
     const line = lineWalkVector(
       results.at(-1) as Omit<CubeCoordinates, 'direction'>,
