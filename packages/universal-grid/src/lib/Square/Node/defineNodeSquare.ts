@@ -17,7 +17,7 @@ export const defineNodeSquare = (
   }
 
   settings.size = createSquareBoundingBox(settings.size)
-  settings.origin = createOrigin(origin, settings.size)
+  settings.origin = createOrigin(settings.origin, settings.size)
 
   return class extends NodeSquare {
     static override get settings(): SquareSettings {

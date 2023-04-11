@@ -18,7 +18,7 @@ export const defineVertexSquare = (
   }
 
   settings.size = createSquareBoundingBox(settings.size)
-  settings.origin = createOrigin(origin, settings.size)
+  settings.origin = createOrigin(settings.origin, settings.size)
 
   return class extends VertexSquare {
     static override get settings(): SquareSettings {
