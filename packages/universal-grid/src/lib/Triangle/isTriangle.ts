@@ -1,4 +1,4 @@
-import { type CubeCoordinates } from '../../types'
+import { type CubeCoordinates } from '../types'
 
 const possibleSum = [1, 2]
 export const isTriangle = (node: CubeCoordinates): boolean =>

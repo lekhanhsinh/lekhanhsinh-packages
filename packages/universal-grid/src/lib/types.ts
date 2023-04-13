@@ -6,6 +6,10 @@ import {
   type SquarePartClass,
   type PartSquareCoordinates,
 } from './Square/types'
+import {
+  type PartTriangleCoordinates,
+  type TrianglePartClass,
+} from './Triangle/types'
 
 export interface PointCoordinates {
   x: number
@@ -33,12 +37,14 @@ export type TupleCoordinates = [
   direction?: number
 ]
 
-export type PartClass = SquarePartClass | HexagonPartClass
+export type PartClass = SquarePartClass | HexagonPartClass | TrianglePartClass
 
 export type PartCoordinates<T extends PartClass> = T extends SquarePartClass
   ? PartSquareCoordinates<T>
   : T extends HexagonPartClass
   ? PartHexagonCoordinates<T>
+  : T extends TrianglePartClass
+  ? PartTriangleCoordinates<T>
   : never
 
 export interface Ellipse {
