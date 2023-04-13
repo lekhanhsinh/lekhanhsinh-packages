@@ -6,6 +6,7 @@ import {
   type PartCoordinates,
   type OffsetCoordinates,
 } from '../../types'
+import { cubeToOffset } from '../Node/converters'
 import { isHexagon } from '../isHexagon'
 import { type HexagonSettings } from '../types'
 import { toCube, toPixel } from './converters'
@@ -46,11 +47,11 @@ export class EdgeHexagon
   }
 
   get col(): number {
-    return this.q
+    return cubeToOffset(this, this).col
   }
 
   get row(): number {
-    return this.r
+    return cubeToOffset(this, this).row
   }
 
   get center(): PointCoordinates {
