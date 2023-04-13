@@ -1,6 +1,6 @@
 import { SQRT3_3 } from '../../../constants'
 import { type PointCoordinates, type CubeCoordinates } from '../../../types'
-import { defineNodeHexagon } from '../../Node'
+import { NodeHexagon } from '../../Node'
 import { roundCubeHexagon } from '../../roundCubeHexagon'
 import { type HexagonSettings } from '../../types'
 import { toPixel } from './toPixel'
@@ -35,8 +35,7 @@ export const fromPixel = (
     return { q, r, s: 0, direction }
   }
 
-  const Hexagon = defineNodeHexagon(settings)
-  const node = new Hexagon({ q, r, s })
+  const node = new NodeHexagon({ q, r, s })
   const corners = Array.from(node.corners().values())
   let corner = corners.at(0) as Required<CubeCoordinates>
   let pixel = toPixel(corner, settings)
