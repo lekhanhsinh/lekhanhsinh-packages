@@ -36,7 +36,7 @@ const gridVertex = new Grid(Vertex, gridNode)
 |:--------:|:------------------:|:------------------:|:------------------:|
 |  Square  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |  Hexagon | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Triangel |                    |                    |                    |
+| Triangle | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 ### Traversers
 
@@ -81,5 +81,22 @@ const gridVertex = new Grid(Vertex, gridNode)
 * rectangleFilled
 ```javascript
     Node.rectangleFilled({ start: [0, 0, 0], direction: DIRECTION.N, size: { width: 10, height: 10 } })
+    Node.rectangleFilled({ center: [0, 0, 0], radius: { xRadius: 10, yRadius: 10 } })
+```
+
+#### Triangle
+
+##### Node
+* lineWalk
+```javascript
+    Node.lineWalk({ start: [0, 0, 0], stop: [10, 10, 10] })
+    Node.lineWalk({ start: [0, 0, 0], direction: DIRECTION.SE, length: 10 })
+```
+* cirlceFilled
+```javascript
+    Node.circleFilled({ center: [3, -5, 2], radius: 2})
+```
+* rectangleFilled
+```javascript
     Node.rectangleFilled({ center: [0, 0, 0], radius: { xRadius: 10, yRadius: 10 } })
 ```

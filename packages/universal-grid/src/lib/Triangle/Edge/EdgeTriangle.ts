@@ -1,4 +1,4 @@
-import { defaultTriangleSettings, isPointUp } from '..'
+import { defaultTriangleSettings, isPointUp, isTriangle } from '..'
 import { DIRECTION, PART_TYPE, SHAPE } from '../../constants'
 import {
   type PointCoordinates,
@@ -79,9 +79,15 @@ export class EdgeTriangle
   constructor(coordinates: PartCoordinates<EdgeTriangle> = [0, 1, 0]) {
     const { q, r, s, direction } = toCube(coordinates, this)
     this.#values = [q, r, s, direction]
+    if (!isTriangle({ q, r, s })) {
+      throw new Error(
+        `Invalid Triangle cube coordinates.
+            Received: ${JSON.stringify({ q, r, s })}`
+      )
+    }
     if (![DIRECTION.N, DIRECTION.SEE, DIRECTION.SWW].includes(this.direction)) {
       throw new Error(
-        `Invalid EdgeTriangle direction: EdgeTriangle direction is (DIRECTION.N | DIRECTION.SEE | DIRECTION.SWW).
+        `Invalid EdgeTriangle direction (DIRECTION.N | DIRECTION.SEE | DIRECTION.SWW):
           Received: ${this.direction}`
       )
     }

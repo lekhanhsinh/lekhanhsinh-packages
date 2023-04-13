@@ -18,6 +18,8 @@
     "square-grid",
     "hexagon",
     "hexagon-grid",
+    "triangle",
+    "triangle-grid",
     "tile",
     "node"
   ]
