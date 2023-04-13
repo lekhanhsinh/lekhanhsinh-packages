@@ -132,17 +132,18 @@ export const lineWalkBetweenPoint = (
   let dq = 0
   let ds = 0
   if (isPointy) {
-    fq = (SQRT3_3 * _start.x - (1 / 3) * _start.y) / (width / 2)
+    fq = ((SQRT3_3 * _start.x) / (width / 2) - (1 / 3) * _start.y) / (width / 2)
     fs = ((2 / 3) * _start.y) / (height / 2)
     fr = -fq - fs
-    dq = (SQRT3_3 * dx - (1 / 3) * dy) / (width / 2)
+    dq = (SQRT3_3 * dx) / (width / 2) - ((1 / 3) * dy) / (height / 2)
     ds = ((2 / 3) * dy) / (height / 2)
   } else {
     fq = ((2 / 3) * _start.x) / (width / 2)
-    fs = (SQRT3_3 * _start.y - (1 / 3) * _start.x) / (height / 2)
+    fs =
+      (SQRT3_3 * _start.y) / (height / 2) - ((1 / 3) * _start.x) / (width / 2)
     fr = -fq - fs
     dq = ((2 / 3) * dx) / (width / 2)
-    ds = (SQRT3_3 * dy - (1 / 3) * dx) / (height / 2)
+    ds = (SQRT3_3 * dy) / (height / 2) - ((1 / 3) * dx) / (width / 2)
   }
 
   let { q, r, s } = roundCubeHexagon({ q: fq, r: fr, s: fs })

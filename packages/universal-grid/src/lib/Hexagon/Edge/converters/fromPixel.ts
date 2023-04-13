@@ -21,12 +21,12 @@ export const fromPixel = (
   let sr = 0
   let ss = 0
   if (isPointy) {
-    sq = (SQRT3_3 * _x - (1 / 3) * _y) / (width / 2)
+    sq = (SQRT3_3 * _x) / (width / 2) - ((1 / 3) * _y) / (height / 2)
     ss = ((2 / 3) * _y) / (height / 2)
     sr = -sq - ss
   } else {
     sq = ((2 / 3) * _x) / (width / 2)
-    ss = (SQRT3_3 * _y - (1 / 3) * _x) / (height / 2)
+    ss = (SQRT3_3 * _y) / (height / 2) - ((1 / 3) * _x) / (width / 2)
     sr = -sq - ss
   }
   const { q, r, s } = roundCubeHexagon({ q: sq, r: sr, s: ss })
